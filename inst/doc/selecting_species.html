@@ -366,7 +366,7 @@ vignette???</p>
 <span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>bf <span class="ot">&lt;-</span> <span class="fu">load_florabr</span>(<span class="at">data_dir =</span> my_dir,</span>
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>                   <span class="at">data_version =</span> <span class="st">&quot;Latest_available&quot;</span>,</span>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>                   <span class="at">type =</span> <span class="st">&quot;short&quot;</span>) <span class="co">#short version</span></span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="co">#&gt; Loading version 393.389</span></span></code></pre></div>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="co">#&gt; Loading version 393.399</span></span></code></pre></div>
 </div>
 <div id="selecting-a-list-of-species-1" class="section level2">
 <h2>Selecting a list of species</h2>
@@ -478,8 +478,8 @@ occurrences in the Atlantic Forest:</p>
 <span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>                      <span class="at">TaxonomicStatus =</span> <span class="st">&quot;Accepted&quot;</span>,</span>
 <span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>                      <span class="at">NomenclaturalStatus =</span> <span class="st">&quot;All&quot;</span>)</span>
 <span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="fu">nrow</span>(af_spp)</span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="co">#&gt; [1] 2346</span></span></code></pre></div>
-<p>The filter returned 2346 species that meet the specified criteria.
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="co">#&gt; [1] 2362</span></span></code></pre></div>
+<p>The filter returned 2362 species that meet the specified criteria.
 It’s important to note that these selections include species with
 confirmed occurrences in the Atlantic Forest, and some of them may also
 have confirmed occurrences in other biomes.</p>
@@ -511,10 +511,10 @@ in the Atlantic Forest, modify the <em>filter_Biome</em> parameter to
 <span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>                      <span class="at">TaxonomicStatus =</span> <span class="st">&quot;Accepted&quot;</span>,</span>
 <span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>                      <span class="at">NomenclaturalStatus =</span> <span class="st">&quot;All&quot;</span>)</span>
 <span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="fu">nrow</span>(only_af_spp)</span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co">#&gt; [1] 1848</span></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co">#&gt; [1] 1849</span></span>
 <span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a><span class="fu">unique</span>(only_af_spp<span class="sc">$</span>Biome)</span>
 <span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Atlantic_Forest&quot;</span></span></code></pre></div>
-<p>Now, the filter has resulted in 1848 species, all exclusively
+<p>Now, the filter has resulted in 1849 species, all exclusively
 confined to the Atlantic Forest biome.</p>
 <p>Furthermore, the package offers the flexibility to apply various
 filtering options (please consult <code>?select_species</code> for
@@ -540,7 +540,7 @@ Grande do Sul (RS):</p>
 <span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>                      <span class="at">TaxonomicStatus =</span> <span class="st">&quot;Accepted&quot;</span>,</span>
 <span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>                      <span class="at">NomenclaturalStatus =</span> <span class="st">&quot;All&quot;</span>)</span>
 <span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="fu">nrow</span>(south_af_spp)</span>
-<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="co">#&gt; [1] 370</span></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="co">#&gt; [1] 371</span></span>
 <span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a></span>
 <span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="co">#First 10 unique values of states in the filtered dataset</span></span>
 <span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="fu">unique</span>(south_af_spp<span class="sc">$</span>States)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
@@ -647,18 +647,12 @@ works, let’s utilize the previously created binomial_names dataset:</p>
 <span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>                             <span class="at">max_distance =</span> <span class="fl">0.1</span>,</span>
 <span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>                             <span class="at">Kingdom =</span> <span class="st">&quot;Plantae&quot;</span>)</span>
 <span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>checked_names</span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co">#&gt;             input_name          Spelling       Suggested_name Distance</span></span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="co">#&gt; 1 Araucaria brasiliana           Correct Araucaria brasiliana        0</span></span>
-<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="co">#&gt; 2 Araucaria brasiliana           Correct Araucaria brasiliana        0</span></span>
-<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="co">#&gt; 3    Solanum restingae           Correct    Solanum restingae        0</span></span>
-<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a><span class="co">#&gt; 4  Butia cattarinensis Probably_incorrect   Butia catarinensis        1</span></span>
-<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a><span class="co">#&gt; 5         Homo sapiens         Incorrect                 &lt;NA&gt;       NA</span></span>
-<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a><span class="co">#&gt;   taxonomicStatus nomenclaturalStatus           acceptedName        family</span></span>
-<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a><span class="co">#&gt; 1         Synonym                &lt;NA&gt; Araucaria angustifolia Araucariaceae</span></span>
-<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="co">#&gt; 2         Synonym        Illegitimate Araucaria angustifolia Araucariaceae</span></span>
-<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a><span class="co">#&gt; 3        Accepted             Correct      Solanum restingae    Solanaceae</span></span>
-<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a><span class="co">#&gt; 4        Accepted                &lt;NA&gt;     Butia catarinensis     Arecaceae</span></span>
-<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a><span class="co">#&gt; 5            &lt;NA&gt;                &lt;NA&gt;                   &lt;NA&gt;          &lt;NA&gt;</span></span></code></pre></div>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co">#             input_name           Spelling       Suggested_name Distance taxonomicStatus nomenclaturalStatus           acceptedName        family</span></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="co"># 1 Araucaria brasiliana            Correct Araucaria brasiliana        0         Synonym                &lt;NA&gt; Araucaria angustifolia Araucariaceae</span></span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="co"># 2 Araucaria brasiliana            Correct Araucaria brasiliana        0         Synonym        Illegitimate Araucaria angustifolia Araucariaceae</span></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="co"># 3    Solanum restingae            Correct    Solanum restingae        0        Accepted             Correct      Solanum restingae    Solanaceae</span></span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a><span class="co"># 4  Butia cattarinensis Probably_incorrect   Butia catarinensis        1        Accepted                &lt;NA&gt;     Butia catarinensis     Arecaceae</span></span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a><span class="co"># 5         Homo sapiens          Not_found                 &lt;NA&gt;       NA            &lt;NA&gt;                &lt;NA&gt;                   &lt;NA&gt;          &lt;NA&gt;</span></span></code></pre></div>
 <p>We can see that <em>Araucaria brasiliana</em> is spelling correctly,
 but it is a synonym of <em>Araucaria angustifolia</em>. <em>Solanum
 restingae</em> is spelling correctly and it is an accepted name. In the
@@ -667,7 +661,7 @@ potentially incorrect (as the name wasn’t found in the database);
 however, a similar name, <em>Butia catarinensis</em>, is suggested by
 the function. The ‘Distance’ column indicates the Levenshtein edit
 distance between the input and the suggested name. The spelling of
-<em>Homo sapiens</em> was flagged as incorrect (as expected, given that
+<em>Homo sapiens</em> was flagged as Not_found (as expected, given that
 <em>Homo sapiens</em> is not a plant!). Consequently, the name was not
 located in the database, and there were no comparable names
 available.</p>

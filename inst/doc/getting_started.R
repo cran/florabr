@@ -37,15 +37,15 @@ knitr::opts_chunk$set(
 #  check_version(data_dir = my_dir)
 #  #> You have the following versions of Brazilian Flora:
 #  #>  393.385
-#  #> 393.389
-#  #>  It includes the latest version:  393.389
+#  #> 393.399
+#  #>  It includes the latest version:  393.399
 
 ## -----------------------------------------------------------------------------
 #  #Short version
 #  bf <- load_florabr(data_dir = my_dir,
 #                     data_version = "Latest_available",
 #                     type = "short") #short
-#  #> Loading version 393.389
+#  #> Loading version 393.399
 #  colnames(bf) #See variables from short version
 #  #>  [1] "species"             "scientificName"      "acceptedName"
 #  #>  [4] "kingdom"             "Group"               "Subgroup"

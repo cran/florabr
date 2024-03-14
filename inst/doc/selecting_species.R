@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 #  bf <- load_florabr(data_dir = my_dir,
 #                     data_version = "Latest_available",
 #                     type = "short") #short version
-#  #> Loading version 393.389
+#  #> Loading version 393.399
 
 ## -----------------------------------------------------------------------------
 #  #Get available options to filter by lifeForm
@@ -105,7 +105,7 @@ knitr::opts_chunk$set(
 #                        TaxonomicStatus = "Accepted",
 #                        NomenclaturalStatus = "All")
 #  nrow(af_spp)
-#  #> [1] 2346
+#  #> [1] 2362
 
 ## -----------------------------------------------------------------------------
 #  #First 7 unique values of biomes in the filtered dataset
@@ -135,7 +135,7 @@ knitr::opts_chunk$set(
 #                        TaxonomicStatus = "Accepted",
 #                        NomenclaturalStatus = "All")
 #  nrow(only_af_spp)
-#  #> [1] 1848
+#  #> [1] 1849
 #  unique(only_af_spp$Biome)
 #  #> [1] "Atlantic_Forest"
 
@@ -157,7 +157,7 @@ knitr::opts_chunk$set(
 #                        TaxonomicStatus = "Accepted",
 #                        NomenclaturalStatus = "All")
 #  nrow(south_af_spp)
-#  #> [1] 370
+#  #> [1] 371
 #  
 #  #First 10 unique values of states in the filtered dataset
 #  unique(south_af_spp$States)[1:10]
@@ -235,18 +235,12 @@ knitr::opts_chunk$set(
 #                               max_distance = 0.1,
 #                               Kingdom = "Plantae")
 #  checked_names
-#  #>             input_name          Spelling       Suggested_name Distance
-#  #> 1 Araucaria brasiliana           Correct Araucaria brasiliana        0
-#  #> 2 Araucaria brasiliana           Correct Araucaria brasiliana        0
-#  #> 3    Solanum restingae           Correct    Solanum restingae        0
-#  #> 4  Butia cattarinensis Probably_incorrect   Butia catarinensis        1
-#  #> 5         Homo sapiens         Incorrect                 <NA>       NA
-#  #>   taxonomicStatus nomenclaturalStatus           acceptedName        family
-#  #> 1         Synonym                <NA> Araucaria angustifolia Araucariaceae
-#  #> 2         Synonym        Illegitimate Araucaria angustifolia Araucariaceae
-#  #> 3        Accepted             Correct      Solanum restingae    Solanaceae
-#  #> 4        Accepted                <NA>     Butia catarinensis     Arecaceae
-#  #> 5            <NA>                <NA>                   <NA>          <NA>
+#  #             input_name           Spelling       Suggested_name Distance taxonomicStatus nomenclaturalStatus           acceptedName        family
+#  # 1 Araucaria brasiliana            Correct Araucaria brasiliana        0         Synonym                <NA> Araucaria angustifolia Araucariaceae
+#  # 2 Araucaria brasiliana            Correct Araucaria brasiliana        0         Synonym        Illegitimate Araucaria angustifolia Araucariaceae
+#  # 3    Solanum restingae            Correct    Solanum restingae        0        Accepted             Correct      Solanum restingae    Solanaceae
+#  # 4  Butia cattarinensis Probably_incorrect   Butia catarinensis        1        Accepted                <NA>     Butia catarinensis     Arecaceae
+#  # 5         Homo sapiens          Not_found                 <NA>       NA            <NA>                <NA>                   <NA>          <NA>
 
 ## -----------------------------------------------------------------------------
 #  #Get only accepted names

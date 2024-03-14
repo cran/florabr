@@ -382,15 +382,24 @@ species’ natural ranges.</li>
 </div>
 <div id="installation" class="section level2">
 <h2>Installation</h2>
+<div id="install-stable-version-from-cran" class="section level3">
+<h3>Install stable version from CRAN</h3>
+<p>To install the stable version of <code>florabr</code> use:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;florabr&quot;</span>)</span></code></pre></div>
+<p><br></p>
+</div>
+<div id="install-development-version-from-github" class="section level3">
+<h3>Install development version from GitHub</h3>
 <p>You can install the released version of <em>florabr</em> from <a href="https://github.com/wevertonbio/florabr">github</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(devtools)){</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>}</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(florabr)){</span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&#39;wevertonbio/florabr&#39;</span>)}</span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="fu">library</span>(florabr)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(devtools)){</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>}</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(florabr)){</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&#39;wevertonbio/florabr&#39;</span>)}</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="fu">library</span>(florabr)</span></code></pre></div>
+</div>
 </div>
 <div id="get-data-from-brazilian-flora" class="section level2">
 <h2>Get data from Brazilian Flora</h2>
@@ -398,16 +407,16 @@ species’ natural ranges.</li>
 form, and distribution) are stored in Darwin Core Archive data sets,
 which is updated weekly. Before downloading the data available in the
 Brazilian Flora 2020, we need to create a folder to save the data:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co">#Creating a folder in a temporary directory</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co">#Replace &#39;file.path(tempdir(), &quot;florabr&quot;)&#39; by a path folder to be create in </span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#your computer</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>my_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;florabr&quot;</span>))</span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="fu">dir.create</span>(my_dir)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co">#Creating a folder in a temporary directory</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co">#Replace &#39;file.path(tempdir(), &quot;florabr&quot;)&#39; by a path folder to be create in </span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#your computer</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>my_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;florabr&quot;</span>))</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="fu">dir.create</span>(my_dir)</span></code></pre></div>
 <p>You can now utilize the <code>get_florabr</code> function to retrieve
 the most recent version of the data:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">get_florabr</span>(<span class="at">output_dir =</span> my_dir, <span class="co">#directory to save the data</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>            <span class="at">data_version =</span> <span class="st">&quot;latest&quot;</span>, <span class="co">#get the most recent version available</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>            <span class="at">overwrite =</span> T) <span class="co">#Overwrite data, if it exists</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">get_florabr</span>(<span class="at">output_dir =</span> my_dir, <span class="co">#directory to save the data</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>            <span class="at">data_version =</span> <span class="st">&quot;latest&quot;</span>, <span class="co">#get the most recent version available</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>            <span class="at">overwrite =</span> T) <span class="co">#Overwrite data, if it exists</span></span></code></pre></div>
 <p>The function will take a few seconds to download the data and a few
 minutes to merge the datasets into a single data.frame. Upon successful
 completion, you will find a folder named with the version of Brazilian
@@ -420,17 +429,17 @@ the Brazilian Flora dataset. To explore the available versions, please
 refer to <a href="https://ipt.jbrj.gov.br/jbrj/resource?r=lista_especies_flora_brasil">this
 link</a>. For downloading a particular version, simply replace ‘latest’
 with the desired version number. For example:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">get_florabr</span>(<span class="at">output_dir =</span> my_dir, <span class="co">#directory to save the data</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>            <span class="at">data_version =</span> <span class="st">&quot;393.385&quot;</span>, <span class="co">#Version 393.385, published on 2023-07-21</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>            <span class="at">overwrite =</span> T) <span class="co">#Overwrite data, if it exists</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">get_florabr</span>(<span class="at">output_dir =</span> my_dir, <span class="co">#directory to save the data</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>            <span class="at">data_version =</span> <span class="st">&quot;393.385&quot;</span>, <span class="co">#Version 393.385, published on 2023-07-21</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>            <span class="at">overwrite =</span> T) <span class="co">#Overwrite data, if it exists</span></span></code></pre></div>
 <p>As previously mentioned, you will find a folder named ‘393.385’
 within the designated directory.</p>
 <p>To view the available versions in your specified directory, run:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">check_version</span>(<span class="at">data_dir =</span> my_dir)</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">#&gt; You have the following versions of Brazilian Flora:</span></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt;  393.385</span></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt; 393.389 </span></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt;  It includes the latest version:  393.389</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">check_version</span>(<span class="at">data_dir =</span> my_dir)</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#&gt; You have the following versions of Brazilian Flora:</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt;  393.385</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt; 393.399 </span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt;  It includes the latest version:  393.399</span></span></code></pre></div>
 </div>
 <div id="loading-the-data" class="section level2">
 <h2>Loading the data</h2>
@@ -444,51 +453,51 @@ two versions of the data: the ‘short’ version (containing the 19 columns
 required for run the other functions of the package) or the ‘complete’
 version (with all original 39 columns). The function imports the ‘short’
 version by default.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co">#Short version</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>bf <span class="ot">&lt;-</span> <span class="fu">load_florabr</span>(<span class="at">data_dir =</span> my_dir,</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>                   <span class="at">data_version =</span> <span class="st">&quot;Latest_available&quot;</span>,</span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>                   <span class="at">type =</span> <span class="st">&quot;short&quot;</span>) <span class="co">#short</span></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt; Loading version 393.389</span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="fu">colnames</span>(bf) <span class="co">#See variables from short version</span></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt;  [1] &quot;species&quot;             &quot;scientificName&quot;      &quot;acceptedName&quot;       </span></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt;  [4] &quot;kingdom&quot;             &quot;Group&quot;               &quot;Subgroup&quot;           </span></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt;  [7] &quot;family&quot;              &quot;genus&quot;               &quot;lifeForm&quot;           </span></span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#&gt; [10] &quot;habitat&quot;             &quot;Biome&quot;               &quot;States&quot;             </span></span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt; [13] &quot;vegetationType&quot;      &quot;Origin&quot;              &quot;Endemism&quot;           </span></span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">#&gt; [16] &quot;taxonomicStatus&quot;     &quot;nomenclaturalStatus&quot; &quot;vernacularName&quot;     </span></span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt; [19] &quot;taxonRank&quot;</span></span></code></pre></div>
-<p>Note that the complete version has 20 more columns:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co">#Complete version</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>bf_complete <span class="ot">&lt;-</span> <span class="fu">load_florabr</span>(<span class="at">data_dir =</span> my_dir,</span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co">#Short version</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>bf <span class="ot">&lt;-</span> <span class="fu">load_florabr</span>(<span class="at">data_dir =</span> my_dir,</span>
 <span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>                   <span class="at">data_version =</span> <span class="st">&quot;Latest_available&quot;</span>,</span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>                   <span class="at">type =</span> <span class="st">&quot;complete&quot;</span>) <span class="co">#complete</span></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="fu">colnames</span>(bf_complete) <span class="co">#See variables from complete version</span></span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#&gt;  [1] &quot;id&quot;                       &quot;taxonID&quot;                 </span></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co">#&gt;  [3] &quot;acceptedNameUsageID&quot;      &quot;parentNameUsageID&quot;       </span></span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co">#&gt;  [5] &quot;originalNameUsageID&quot;      &quot;Group&quot;                   </span></span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="co">#&gt;  [7] &quot;Subgroup&quot;                 &quot;species&quot;                 </span></span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="co">#&gt;  [9] &quot;acceptedName&quot;             &quot;scientificName&quot;          </span></span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co">#&gt; [11] &quot;acceptedNameUsage&quot;        &quot;parentNameUsage&quot;         </span></span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="co">#&gt; [13] &quot;namePublishedIn&quot;          &quot;namePublishedInYear&quot;     </span></span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="co">#&gt; [15] &quot;higherClassification&quot;     &quot;kingdom&quot;                 </span></span>
-<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="co">#&gt; [17] &quot;phylum&quot;                   &quot;class&quot;                   </span></span>
-<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a><span class="co">#&gt; [19] &quot;order&quot;                    &quot;family&quot;                  </span></span>
-<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a><span class="co">#&gt; [21] &quot;genus&quot;                    &quot;specificEpithet&quot;         </span></span>
-<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="co">#&gt; [23] &quot;infraspecificEpithet&quot;     &quot;taxonRank&quot;               </span></span>
-<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a><span class="co">#&gt; [25] &quot;scientificNameAuthorship&quot; &quot;taxonomicStatus&quot;         </span></span>
-<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="co">#&gt; [27] &quot;nomenclaturalStatus&quot;      &quot;vernacularName&quot;          </span></span>
-<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a><span class="co">#&gt; [29] &quot;lifeForm&quot;                 &quot;habitat&quot;                 </span></span>
-<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a><span class="co">#&gt; [31] &quot;vegetationType&quot;           &quot;Origin&quot;                  </span></span>
-<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a><span class="co">#&gt; [33] &quot;Endemism&quot;                 &quot;Biome&quot;                   </span></span>
-<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a><span class="co">#&gt; [35] &quot;States&quot;                   &quot;countryCode&quot;             </span></span>
-<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a><span class="co">#&gt; [37] &quot;modified&quot;                 &quot;bibliographicCitation&quot;   </span></span>
-<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a><span class="co">#&gt; [39] &quot;references&quot;</span></span></code></pre></div>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>                   <span class="at">type =</span> <span class="st">&quot;short&quot;</span>) <span class="co">#short</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#&gt; Loading version 393.399</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="fu">colnames</span>(bf) <span class="co">#See variables from short version</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#&gt;  [1] &quot;species&quot;             &quot;scientificName&quot;      &quot;acceptedName&quot;       </span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co">#&gt;  [4] &quot;kingdom&quot;             &quot;Group&quot;               &quot;Subgroup&quot;           </span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co">#&gt;  [7] &quot;family&quot;              &quot;genus&quot;               &quot;lifeForm&quot;           </span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="co">#&gt; [10] &quot;habitat&quot;             &quot;Biome&quot;               &quot;States&quot;             </span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="co">#&gt; [13] &quot;vegetationType&quot;      &quot;Origin&quot;              &quot;Endemism&quot;           </span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co">#&gt; [16] &quot;taxonomicStatus&quot;     &quot;nomenclaturalStatus&quot; &quot;vernacularName&quot;     </span></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="co">#&gt; [19] &quot;taxonRank&quot;</span></span></code></pre></div>
+<p>Note that the complete version has 20 more columns:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co">#Complete version</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>bf_complete <span class="ot">&lt;-</span> <span class="fu">load_florabr</span>(<span class="at">data_dir =</span> my_dir,</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>                   <span class="at">data_version =</span> <span class="st">&quot;Latest_available&quot;</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>                   <span class="at">type =</span> <span class="st">&quot;complete&quot;</span>) <span class="co">#complete</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="fu">colnames</span>(bf_complete) <span class="co">#See variables from complete version</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#&gt;  [1] &quot;id&quot;                       &quot;taxonID&quot;                 </span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co">#&gt;  [3] &quot;acceptedNameUsageID&quot;      &quot;parentNameUsageID&quot;       </span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co">#&gt;  [5] &quot;originalNameUsageID&quot;      &quot;Group&quot;                   </span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co">#&gt;  [7] &quot;Subgroup&quot;                 &quot;species&quot;                 </span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="co">#&gt;  [9] &quot;acceptedName&quot;             &quot;scientificName&quot;          </span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="co">#&gt; [11] &quot;acceptedNameUsage&quot;        &quot;parentNameUsage&quot;         </span></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="co">#&gt; [13] &quot;namePublishedIn&quot;          &quot;namePublishedInYear&quot;     </span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="co">#&gt; [15] &quot;higherClassification&quot;     &quot;kingdom&quot;                 </span></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="co">#&gt; [17] &quot;phylum&quot;                   &quot;class&quot;                   </span></span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="co">#&gt; [19] &quot;order&quot;                    &quot;family&quot;                  </span></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="co">#&gt; [21] &quot;genus&quot;                    &quot;specificEpithet&quot;         </span></span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="co">#&gt; [23] &quot;infraspecificEpithet&quot;     &quot;taxonRank&quot;               </span></span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a><span class="co">#&gt; [25] &quot;scientificNameAuthorship&quot; &quot;taxonomicStatus&quot;         </span></span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="co">#&gt; [27] &quot;nomenclaturalStatus&quot;      &quot;vernacularName&quot;          </span></span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="co">#&gt; [29] &quot;lifeForm&quot;                 &quot;habitat&quot;                 </span></span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a><span class="co">#&gt; [31] &quot;vegetationType&quot;           &quot;Origin&quot;                  </span></span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a><span class="co">#&gt; [33] &quot;Endemism&quot;                 &quot;Biome&quot;                   </span></span>
+<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a><span class="co">#&gt; [35] &quot;States&quot;                   &quot;countryCode&quot;             </span></span>
+<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a><span class="co">#&gt; [37] &quot;modified&quot;                 &quot;bibliographicCitation&quot;   </span></span>
+<span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a><span class="co">#&gt; [39] &quot;references&quot;</span></span></code></pre></div>
 <p>If you want to save the datasets to open with an external editor
 (e.g. Excel), you can save the data.frame as a CSV file:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="at">x =</span> bf,</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>          <span class="at">file =</span> <span class="fu">file.path</span>(my_dir, <span class="st">&quot;BrazilianFlora.csv&quot;</span>),</span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>          <span class="at">row.names =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="at">x =</span> bf,</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>          <span class="at">file =</span> <span class="fu">file.path</span>(my_dir, <span class="st">&quot;BrazilianFlora.csv&quot;</span>),</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>          <span class="at">row.names =</span> F)</span></code></pre></div>
 </div>
 
 
