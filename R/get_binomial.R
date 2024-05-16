@@ -20,6 +20,13 @@ get_binomial <- function(species_names) {
                 class(species_names)))
   }
 
+  # Remove excess of whitespace between words
+  species_names <- gsub("\\s+", " ", species_names)
+
+  # Remove leading and/or trailing whitespace
+  species_names <- trimws(species_names)
+
+
   selected_species_names <- vapply(species_names, FUN.VALUE = character(1),
                                    function(text) {
     words <- strsplit(text, " ")[[1]]

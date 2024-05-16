@@ -1,4 +1,4 @@
-## ---- include = FALSE---------------------------------------------------------
+## ----include = FALSE----------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 #              data_version = "latest", #get the most recent version available
 #              overwrite = T) #Overwrite data, if it exists
 
-## ---- message=FALSE, warning=F------------------------------------------------
+## ----message=FALSE, warning=F-------------------------------------------------
 #  library(florabr)
 #  library(terra)
 #  #Folder where you stored the data with the function get_florabr()
@@ -24,31 +24,31 @@ knitr::opts_chunk$set(
 #  bf <- load_florabr(data_dir = my_dir,
 #                     data_version = "Latest_available",
 #                     type = "short") #short version
-#  #> Loading version 393.389
+#  #> Loading version 393.401
 
 ## -----------------------------------------------------------------------------
-#  #Load Brazilian Flora data
+#  #Load Flora e Funga do Brasil data
 #  data("bf_data")
 #  #Select endemic and native species of trees with occurrence only in Amazon
 #  am_trees <- select_species(data = bf_data,
 #                            include_subspecies = FALSE,
 #                            include_variety = FALSE,
-#                            Kingdom = "Plantae",
-#                            Group = "All", Subgroup = "All",
-#                            Family = "All", Genus = "All",
-#                            LifeForm = "Tree", filter_LifeForm = "only",
-#                            Habitat = "All", filter_Habitat = "in",
-#                            Biome = "Amazon",
-#                            filter_Biome = "only",
-#                            State = "All", filter_State = "and",
-#                            VegetationType = "All",
-#                            filter_Vegetation = "in",
-#                            Endemism = "Endemic", Origin = "Native",
-#                            TaxonomicStatus = "Accepted",
-#                            NomenclaturalStatus = "All")
+#                            kingdom = "Plantae",
+#                            group = "All", subgroup = "All",
+#                            family = "All", genus = "All",
+#                            lifeForm = "Tree", filter_lifeForm = "only",
+#                            habitat = "All", filter_habitat = "in",
+#                            biome = "Amazon",
+#                            filter_biome = "only",
+#                            state = "All", filter_state = "and",
+#                            vegetation = "All",
+#                            filter_vegetation = "in",
+#                            endemism = "Endemic", origin = "Native",
+#                            taxonomicStatus = "Accepted",
+#                            nomenclaturalStatus = "All")
 #  #Get presence-absence matrix
-#  pam_am <- get_pam(data = am_trees, by_Biome = TRUE, by_State = TRUE,
-#                   by_vegetationType = FALSE, remove_empty_sites = TRUE,
+#  pam_am <- get_pam(data = am_trees, by_biome = TRUE, by_state = TRUE,
+#                   by_vegetation = FALSE, remove_empty_sites = TRUE,
 #                   return_richness_summary = TRUE,
 #                   return_spatial_richness = TRUE,
 #                   return_plot = TRUE)
@@ -71,13 +71,13 @@ knitr::opts_chunk$set(
 #  # # A tibble: 7 × 3
 #  #   Biome  States Richness
 #  #   <fct>  <fct>     <dbl>
-#  # 1 Amazon AM          599
+#  # 1 Amazon AM          606
 #  # 2 Amazon MA           34
-#  # 3 Amazon PA          294
+#  # 3 Amazon PA          296
 #  # 4 Amazon TO            7
 #  # 5 Amazon MT           63
 #  # 6 Amazon RR           45
-#  # 7 Amazon AC          109
+#  # 7 Amazon AC          107
 
 ## ----IMG09, eval=TRUE, echo = FALSE-------------------------------------------
 knitr::include_graphics("vignettes_img/Image_09.png")

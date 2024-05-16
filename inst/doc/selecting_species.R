@@ -1,4 +1,4 @@
-## ---- include = FALSE---------------------------------------------------------
+## ----include = FALSE----------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -13,99 +13,99 @@ knitr::opts_chunk$set(
 #  bf <- load_florabr(data_dir = my_dir,
 #                     data_version = "Latest_available",
 #                     type = "short") #short version
-#  #> Loading version 393.399
+#  #> Loading version 393.401
 
 ## -----------------------------------------------------------------------------
 #  #Get available options to filter by lifeForm
 #  get_attributes(data = bf,
 #                 attribute = "lifeForm",
-#                 Kingdom = "Plantae")
-#  #>               lifeForm            Forma_de_vida
-#  #> 1      Aquatic-Benthos          Aquatica-Bentos
-#  #> 2      Aquatic-Neuston         Aquatica-Neuston
-#  #> 3     Aquatic-Plankton        Aquatica-Plancton
-#  #> 4                Shrub                  Arbusto
-#  #> 5                 Tree                   Arvore
-#  #> 6               Bamboo                    Bambu
-#  #> 7              Cushion                    Coxim
-#  #> 8             Dendroid                Dendroide
-#  #> 9              Unknown             Desconhecida
-#  #> 10          Dracaenoid               Dracenoide
-#  #> 13                Herb                     Erva
-#  #> 14          Flabellate                Flabelado
-#  #> 15             Foliose                  Folhosa
-#  #> 16 Liana/scandent/vine Liana/voluvel/trepadeira
-#  #> 19           Palm_tree                 Palmeira
-#  #> 21             Pendent                 Pendente
-#  #> 23            Subshrub               Subarbusto
-#  #> 24           Succulent                Suculenta
-#  #> 25            Thallose                   Talosa
-#  #> 26                 Mat                   Tapete
-#  #> 27                Weft                    Trama
-#  #> 28                Tuft                     Tufo
+#                 kingdom = "Plantae")
+#  #>               lifeForm
+#  #> 1      Aquatic-Benthos
+#  #> 2      Aquatic-Neuston
+#  #> 3     Aquatic-Plankton
+#  #> 4                Shrub
+#  #> 5                 Tree
+#  #> 6               Bamboo
+#  #> 7              Cushion
+#  #> 8             Dendroid
+#  #> 9              Unknown
+#  #> 10          Dracaenoid
+#  #> 13                Herb
+#  #> 14          Flabellate
+#  #> 15             Foliose
+#  #> 16 Liana/scandent/vine
+#  #> 19           Palm_tree
+#  #> 21             Pendent
+#  #> 23            Subshrub
+#  #> 24           Succulent
+#  #> 25            Thallose
+#  #> 26                 Mat
+#  #> 27                Weft
+#  #> 28                Tuft
 #  
 #  #Get available options to filter by  Biome
 #  get_attributes(data = bf,
 #                 attribute = "Biome",
-#                 Kingdom = "Plantae")
-#  #>                 Biome                Bioma
-#  #> 1              Amazon             Amazonia
-#  #> 2     Atlantic_Forest       Mata_Atlantica
-#  #> 3            Caatinga             Caatinga
-#  #> 4             Cerrado              Cerrado
-#  #> 5               Pampa                Pampa
-#  #> 6            Pantanal             Pantanal
-#  #> 7 Not_found_in_Brazil Nao_ocorre_no_Brasil
+#                 kingdom = "Plantae")
+#  #>                 biome
+#  #> 1              Amazon
+#  #> 2     Atlantic_Forest
+#  #> 3            Caatinga
+#  #> 4             Cerrado
+#  #> 5               Pampa
+#  #> 6            Pantanal
+#  #> 7 Not_found_in_brazil
 #  
-#  #Get available options to filter by VegetationType
+#  #Get available options to filter by vegetation
 #  get_attributes(data = bf,
 #                 attribute = "vegetationType",
-#                 Kingdom = "Plantae")
-#  #>                     VegetationType                           TipoVegetacao
-#  #> 1                   Anthropic_Area                          Area Antropica
-#  #> 2                         Caatinga                Caatinga (stricto sensu)
-#  #> 3            Amazonian_Campinarana                             Campinarana
-#  #> 4          High_Altitude_Grassland                       Campo de Altitude
-#  #> 5                    Flooded_Field                         Campo de Varzea
-#  #> 6                        Grassland                             Campo Limpo
-#  #> 7             Highland_Rocky_Field                          Campo rupestre
-#  #> 8                         Carrasco                                Carrasco
-#  #> 9                          Cerrado                    Cerrado (lato sensu)
-#  #> 10                  Gallery_Forest              Floresta Ciliar ou Galeria
-#  #> 11          Inundated_Forest_Igapo                       Floresta de Igapo
-#  #> 12              Terra_Firme_Forest                 Floresta de Terra Firme
-#  #> 13                Inundated_Forest                      Floresta de Varzea
-#  #> 14    Seasonallly_Deciduous_Forest            Floresta Estacional Decidual
-#  #> 15       Seasonal_Evergreen_Forest         Floresta Estacional Perenifolia
-#  #> 16 Seasonally_Semideciduous_Forest        Floresta Estacional Semidecidual
-#  #> 17                      Rainforest Floresta Ombrofila (= Floresta Pluvial)
-#  #> 18      Mixed_Ombrophyllous_Forest                Floresta Ombrofila Mista
-#  #> 19                        Mangrove                               Manguezal
-#  #> 20                      Palm_Grove                               Palmeiral
-#  #> 21                        Restinga                                Restinga
-#  #> 22               Amazonian_Savanna                        Savana Amazonica
-#  #> 23              Aquatic_Vegetation                      Vegetacao Aquatica
-#  #> 24         Rock_outcrop_Vegetation   Vegetacao Sobre Afloramentos Rochosos
-#  #> 25             Not_found_in_Brazil                    Nao ocorre no Brasil
+#                 kingdom = "Plantae")
+#  #>                         vegetation
+#  #> 1                   Anthropic_Area
+#  #> 2                         Caatinga
+#  #> 3            Amazonian_Campinarana
+#  #> 4          High_Altitude_Grassland
+#  #> 5                    Flooded_Field
+#  #> 6                        Grassland
+#  #> 7             Highland_Rocky_Field
+#  #> 8                         Carrasco
+#  #> 9                          Cerrado
+#  #> 10                  Gallery_Forest
+#  #> 11          Inundated_Forest_Igapo
+#  #> 12              Terra_Firme_Forest
+#  #> 13                Inundated_Forest
+#  #> 14    Seasonallly_Deciduous_Forest
+#  #> 15       Seasonal_Evergreen_Forest
+#  #> 16 Seasonally_Semideciduous_Forest
+#  #> 17                      Rainforest
+#  #> 18      Mixed_Ombrophyllous_Forest
+#  #> 19                        Mangrove
+#  #> 20                      Palm_Grove
+#  #> 21                        Restinga
+#  #> 22               Amazonian_Savanna
+#  #> 23              Aquatic_vegetation
+#  #> 24         Rock_outcrop_vegetation
+#  #> 25             Not_found_in_Brazil
 
 ## -----------------------------------------------------------------------------
 #  af_spp <- select_species(data = bf,
 #                        include_subspecies = FALSE, include_variety = FALSE,
-#                        Kingdom = "Plantae", Group = "All", Subgroup = "All",
-#                        Family = "All", Genus = "All",
-#                        LifeForm = "Tree", #Specify tree species
-#                        filter_LifeForm = "in",
-#                        Habitat = "All", filter_Habitat = "in",
-#                        Biome = "Atlantic_Forest", #Occuring in the At. Forest
-#                        filter_Biome = "in", #In Atlantic Forest
-#                        State = "All", filter_State = "in",
-#                        VegetationType = "All", filter_Vegetation = "in",
-#                        Endemism = "Endemic", #Only endemics to Brazil
-#                        Origin = "Native", #Only natives
-#                        TaxonomicStatus = "Accepted",
-#                        NomenclaturalStatus = "All")
+#                        kingdom = "Plantae", group = "All", subgroup = "All",
+#                        family = "All", genus = "All",
+#                        lifeForm = "Tree", #Specify tree species
+#                        filter_lifeForm = "in",
+#                        habitat = "All", filter_habitat = "in",
+#                        biome = "Atlantic_Forest", #Occuring in the At. Forest
+#                        filter_biome = "in", #In Atlantic Forest
+#                        state = "All", filter_state = "in",
+#                        vegetation = "All", filter_vegetation = "in",
+#                        endemism = "Endemic", #Only endemics to Brazil
+#                        origin = "Native", #Only natives
+#                        taxonomicStatus = "Accepted",
+#                        nomenclaturalStatus = "All")
 #  nrow(af_spp)
-#  #> [1] 2362
+#  #> [1] 2372
 
 ## -----------------------------------------------------------------------------
 #  #First 7 unique values of biomes in the filtered dataset
@@ -121,46 +121,46 @@ knitr::opts_chunk$set(
 ## -----------------------------------------------------------------------------
 #  only_af_spp <- select_species(data = bf,
 #                        include_subspecies = FALSE, include_variety = FALSE,
-#                        Kingdom = "Plantae", Group = "All", Subgroup = "All",
-#                        Family = "All", Genus = "All",
-#                        LifeForm = "Tree", #Specify tree species
-#                        filter_LifeForm = "in",
-#                        Habitat = "All", filter_Habitat = "in",
-#                        Biome = "Atlantic_Forest", #Occuring in the At. Forest
-#                        filter_Biome = "only", #ONLY in Atlantic Forest
-#                        State = "All", filter_State = "in",
-#                        VegetationType = "All", filter_Vegetation = "in",
-#                        Endemism = "Endemic", #Only endemics to Brazil
-#                        Origin = "Native", #Only natives
-#                        TaxonomicStatus = "Accepted",
-#                        NomenclaturalStatus = "All")
+#                        kingdom = "Plantae", group = "All", subgroup = "All",
+#                        family = "All", genus = "All",
+#                        lifeForm = "Tree", #Specify tree species
+#                        filter_lifeForm = "in",
+#                        habitat = "All", filter_habitat = "in",
+#                        biome = "Atlantic_Forest", #Occuring in the At. Forest
+#                        filter_biome = "only", #ONLY in Atlantic Forest
+#                        state = "All", filter_state = "in",
+#                        vegetation = "All", filter_vegetation = "in",
+#                        endemism = "Endemic", #Only endemics to Brazil
+#                        origin = "Native", #Only natives
+#                        taxonomicStatus = "Accepted",
+#                        nomenclaturalStatus = "All")
 #  nrow(only_af_spp)
-#  #> [1] 1849
-#  unique(only_af_spp$Biome)
+#  #> [1] 1858
+#  unique(only_af_spp$biome)
 #  #> [1] "Atlantic_Forest"
 
 ## -----------------------------------------------------------------------------
 #  south_af_spp <- select_species(data = bf,
 #                        include_subspecies = FALSE, include_variety = FALSE,
-#                        Kingdom = "Plantae", Group = "All", Subgroup = "All",
-#                        Family = "All", Genus = "All",
-#                        LifeForm = "Tree", #Specify tree species
-#                        filter_LifeForm = "in",
-#                        Habitat = "All", filter_Habitat = "in",
-#                        Biome = "Atlantic_Forest", #Occuring in the At. Forest
-#                        filter_Biome = "only", #Only in Atlantic Forest
-#                        State = c("PR", "SC", "RS"), #States - Use the acronynms
-#                        filter_State = "in", #IN at least one of these states
-#                        VegetationType = "All", filter_Vegetation = "in",
-#                        Endemism = "Endemic", #Only endemics to Brazil
-#                        Origin = "Native", #Only natives
-#                        TaxonomicStatus = "Accepted",
-#                        NomenclaturalStatus = "All")
+#                        kingdom = "Plantae", group = "All", subgroup = "All",
+#                        family = "All", genus = "All",
+#                        lifeForm = "Tree", #Specify tree species
+#                        filter_lifeForm = "in",
+#                        habitat = "All", filter_habitat = "in",
+#                        biome = "Atlantic_Forest", #Occuring in the At. Forest
+#                        filter_biome = "only", #Only in Atlantic Forest
+#                        state = c("PR", "SC", "RS"), #states - Use the acronynms
+#                        filter_state = "in", #IN at least one of these states
+#                        vegetation = "All", filter_vegetation = "in",
+#                        endemism = "Endemic", #Only endemics to Brazil
+#                        origin = "Native", #Only natives
+#                        taxonomicStatus = "Accepted",
+#                        nomenclaturalStatus = "All")
 #  nrow(south_af_spp)
-#  #> [1] 371
+#  #> [1] 372
 #  
 #  #First 10 unique values of states in the filtered dataset
-#  unique(south_af_spp$States)[1:10]
+#  unique(south_af_spp$states)[1:10]
 #  #>  [1] "BA;ES;PR;RJ;SC;SP"               "AL;BA;CE;ES;MA;MG;PB;PE;PR;RJ;SE;SP"
 #  #>  [3] "PR;RS;SC"                        "BA;CE;ES;MA;MG;PE;PR;RJ;SP"
 #  #>  [5] "MG;PR;RJ;SC;SP"                  "MG;PR;RJ;RS;SC;SP"
@@ -170,57 +170,57 @@ knitr::opts_chunk$set(
 ## -----------------------------------------------------------------------------
 #  south_af_spp2 <- select_species(data = bf,
 #                        include_subspecies = FALSE, include_variety = FALSE,
-#                        Kingdom = "Plantae", Group = "All", Subgroup = "All",
-#                        Family = "All", Genus = "All",
-#                        LifeForm = "Tree", #Specify tree species
-#                        filter_LifeForm = "in",
-#                        Habitat = "All", filter_Habitat = "in",
-#                        Biome = "Atlantic_Forest", #Occurring in the At. Forest
-#                        filter_Biome = "only", #Only in Atlantic Forest
-#                        State = c("PR", "SC", "RS"), #States - Use the acronynms
-#                        filter_State = "and", #PR and SC and RS
-#                        VegetationType = "All", filter_Vegetation = "in",
-#                        Endemism = "Endemic", #Only endemics to Brazil
-#                        Origin = "Native", #Only natives
-#                        TaxonomicStatus = "Accepted",
-#                        NomenclaturalStatus = "All")
+#                        kingdom = "Plantae", group = "All", subgroup = "All",
+#                        family = "All", genus = "All",
+#                        lifeForm = "Tree", #Specify tree species
+#                        filter_lifeForm = "in",
+#                        habitat = "All", filter_habitat = "in",
+#                        biome = "Atlantic_Forest", #Occurring in the At. Forest
+#                        filter_biome = "only", #Only in Atlantic Forest
+#                        state = c("PR", "SC", "RS"), #states - Use the acronynms
+#                        filter_state = "and", #PR and SC and RS
+#                        vegetation = "All", filter_vegetation = "in",
+#                        endemism = "Endemic", #Only endemics to Brazil
+#                        origin = "Native", #Only natives
+#                        taxonomicStatus = "Accepted",
+#                        nomenclaturalStatus = "All")
 #  nrow(south_af_spp2)
 #  #> [1] 29
 #  
 #  #All unique states in the filtered dataset
-#  unique(south_af_spp2$States)
+#  unique(south_af_spp2$states)
 #  #> [1] "PR;RS;SC"       "MG;PR;RS;SC;SP" "PR;RS;SC;SP"    "ES;PR;RS;SC;SP"
 #  #> [5] "MG;PR;RS;SC"
 
 ## -----------------------------------------------------------------------------
 #  south_af_spp3 <- select_species(data = bf,
 #                        include_subspecies = FALSE, include_variety = FALSE,
-#                        Kingdom = "Plantae", Group = "All", Subgroup = "All",
-#                        Family = "All", Genus = "All",
-#                        LifeForm = "Tree", #Specify tree species
-#                        filter_LifeForm = "in",
-#                        Habitat = "All", filter_Habitat = "in",
-#                        Biome = "Atlantic_Forest", #Occuring in the At. Forest
-#                        filter_Biome = "only", #Only in Atlantic Forest
-#                        State = c("PR", "SC", "RS"), #States - Use the acronynms
-#                        filter_State = "only", #PR and SC and RS, no other else
-#                        VegetationType = "All", filter_Vegetation = "in",
-#                        Endemism = "Endemic", #Only endemics to Brazil
-#                        Origin = "Native", #Only natives
-#                        TaxonomicStatus = "Accepted",
-#                        NomenclaturalStatus = "All")
+#                        kingdom = "Plantae", group = "All", subgroup = "All",
+#                        family = "All", genus = "All",
+#                        lifeForm = "Tree", #Specify tree species
+#                        filter_lifeForm = "in",
+#                        habitat = "All", filter_habitat = "in",
+#                        biome = "Atlantic_Forest", #Occuring in the At. Forest
+#                        filter_biome = "only", #Only in Atlantic Forest
+#                        state = c("PR", "SC", "RS"), #states - Use the acronynms
+#                        filter_state = "only", #PR and SC and RS, no other else
+#                        vegetation = "All", filter_vegetation = "in",
+#                        endemism = "Endemic", #Only endemics to Brazil
+#                        origin = "Native", #Only natives
+#                        taxonomicStatus = "Accepted",
+#                        nomenclaturalStatus = "All")
 #  nrow(south_af_spp3)
 #  #> [1] 13
 #  
 #  #The unique state in the filtered dataset
-#  unique(south_af_spp3$States)
+#  unique(south_af_spp3$states)
 #  #> [1] "PR;RS;SC"
 
 ## -----------------------------------------------------------------------------
 #  complete_names <- c("Araucaria brasiliana var. ridolfiana (Pi.Savi) Gordon",
-#                      "Solanum restingae S.Knapp",
-#                      "Butia cattarinensis Noblick & Lorenzi",
-#                      "Homo sapiens")
+#                      " Solanum restingae  S.Knapp",
+#                      "Butia cattarinensis  Noblick & Lorenzi   ",
+#                      "Homo   sapiens")
 #  #Human specie was used just as an example that will be used to illustrate the
 #  #next function
 #  binomial_names <- get_binomial(species_names = complete_names)
@@ -233,7 +233,7 @@ knitr::opts_chunk$set(
 #  checked_names <- check_names(data = bf,
 #                               species = binomial_names,
 #                               max_distance = 0.1,
-#                               Kingdom = "Plantae")
+#                               kingdom = "Plantae")
 #  checked_names
 #  #             input_name           Spelling       Suggested_name Distance taxonomicStatus nomenclaturalStatus           acceptedName        family
 #  # 1 Araucaria brasiliana            Correct Araucaria brasiliana        0         Synonym                <NA> Araucaria angustifolia Araucariaceae
@@ -251,7 +251,7 @@ knitr::opts_chunk$set(
 #  my_sp <- subset_species(data = bf, species = accepted_names,
 #                        include_subspecies = FALSE,
 #                        include_variety = FALSE,
-#                        Kingdom = "Plantae")
+#                        kingdom = "Plantae")
 #  my_sp
 #  #>                      species                          scientificName
 #  #> 11785      Solanum restingae               Solanum restingae S.Knapp
@@ -270,7 +270,7 @@ knitr::opts_chunk$set(
 #  #> 26790 High_Altitude_Grassland;Mixed_Ombrophyllous_Forest;
 #  #>       Seasonally_Semideciduous_Forest
 #  #> 99881 Restinga
-#  #>       Origin    Endemism taxonomicStatus nomenclaturalStatus
+#  #>       origin    endemism taxonomicStatus nomenclaturalStatus
 #  #> 11785 Native     Endemic        Accepted             Correct
 #  #> 26790 Native Non-endemic        Accepted             Correct
 #  #> 99881 Native     Endemic        Accepted                <NA>
@@ -288,7 +288,7 @@ knitr::opts_chunk$set(
 #  my_sp2 <- subset_species(data = bf, species = accepted_names,
 #                        include_subspecies = TRUE,
 #                        include_variety = TRUE,
-#                        Kingdom = "Plantae")
+#                        kingdom = "Plantae")
 #  my_sp2[1:5,]
 #  #>                      species                            scientificName
 #  #> 11785      Solanum restingae                 Solanum restingae S.Knapp
@@ -315,7 +315,7 @@ knitr::opts_chunk$set(
 #  #> 35204
 #  #> 35205
 #  #> 35206
-#  #>       Origin    Endemism taxonomicStatus nomenclaturalStatus
+#  #>       origin    endemism taxonomicStatus nomenclaturalStatus
 #  #> 11785 Native     Endemic        Accepted             Correct
 #  #> 26790 Native Non-endemic        Accepted             Correct
 #  #> 35204   <NA>        <NA>         Synonym                <NA>
@@ -334,4 +334,23 @@ knitr::opts_chunk$set(
 #  #> 35204   Variety
 #  #> 35205   Variety
 #  #> 35206   Variety
+
+## -----------------------------------------------------------------------------
+#  spp <- c("Araucaria angustifolia", "Adesmia paranensis")
+#  spp_syn <- get_synonym(data = bf, species = spp)
+#  spp_syn
+#  #>                       synonym           acceptedName taxonomicStatus      nomenclaturalStatus
+#  #> 35323    Araucaria brasiliana Araucaria angustifolia         Synonym                     <NA>
+#  #> 35325  Araucaria brasiliensis Araucaria angustifolia         Synonym                     <NA>
+#  #> 35327        Araucaria dioica Araucaria angustifolia         Synonym                     <NA>
+#  #> 35328       Araucaria elegans Araucaria angustifolia         Synonym                     <NA>
+#  #> 35329    Araucaria ridolfiana Araucaria angustifolia         Synonym                     <NA>
+#  #> 35330       Araucaria saviana Araucaria angustifolia         Synonym                     <NA>
+#  #> 35332   Columbea angustifolia Araucaria angustifolia         Synonym Legitimate_but_incorrect
+#  #> 35333     Columbea brasiliana Araucaria angustifolia         Synonym Legitimate_but_incorrect
+#  #> 60644            Pinus dioica Araucaria angustifolia         Synonym                     <NA>
+#  #> 141020     Araucaria bibbiani Araucaria angustifolia         Synonym                     <NA>
+#  #> 141021   Araucaria lindleyana Araucaria angustifolia         Synonym                     <NA>
+#  #> 141041   Araucaria brasiliana Araucaria angustifolia         Synonym             Illegitimate
+#  #> 85308    Adesmia psoraleoides     Adesmia paranensis         Synonym Legitimate_but_incorrect
 

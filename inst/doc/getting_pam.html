@@ -360,7 +360,7 @@ with florabr</a></p>
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>bf <span class="ot">&lt;-</span> <span class="fu">load_florabr</span>(<span class="at">data_dir =</span> my_dir,</span>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>                   <span class="at">data_version =</span> <span class="st">&quot;Latest_available&quot;</span>,</span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>                   <span class="at">type =</span> <span class="st">&quot;short&quot;</span>) <span class="co">#short version</span></span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="co">#&gt; Loading version 393.389</span></span></code></pre></div>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="co">#&gt; Loading version 393.401</span></span></code></pre></div>
 </div>
 <div id="getting-a-presence-absence-matrix" class="section level2">
 <h2>Getting a presence-absence matrix</h2>
@@ -371,28 +371,28 @@ these. In addition to the PAM, the function also provides a summary and
 a SpatVector containing the number of species in each site.</p>
 <p>As an example, let’s obtain a PAM consisting of all tree species
 native and endemic to the Amazon biome:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co">#Load Brazilian Flora data</span></span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co">#Load Flora e Funga do Brasil data</span></span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;bf_data&quot;</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#Select endemic and native species of trees with occurrence only in Amazon</span></span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>am_trees <span class="ot">&lt;-</span> <span class="fu">select_species</span>(<span class="at">data =</span> bf_data,</span>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>                          <span class="at">include_subspecies =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>                          <span class="at">include_variety =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>                          <span class="at">Kingdom =</span> <span class="st">&quot;Plantae&quot;</span>,</span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>                          <span class="at">Group =</span> <span class="st">&quot;All&quot;</span>, <span class="at">Subgroup =</span> <span class="st">&quot;All&quot;</span>,</span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>                          <span class="at">Family =</span> <span class="st">&quot;All&quot;</span>, <span class="at">Genus =</span> <span class="st">&quot;All&quot;</span>,</span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>                          <span class="at">LifeForm =</span> <span class="st">&quot;Tree&quot;</span>, <span class="at">filter_LifeForm =</span> <span class="st">&quot;only&quot;</span>,</span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>                          <span class="at">Habitat =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_Habitat =</span> <span class="st">&quot;in&quot;</span>,</span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>                          <span class="at">Biome =</span> <span class="st">&quot;Amazon&quot;</span>,</span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>                          <span class="at">filter_Biome =</span> <span class="st">&quot;only&quot;</span>,</span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>                          <span class="at">State =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_State =</span> <span class="st">&quot;and&quot;</span>,</span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>                          <span class="at">VegetationType =</span> <span class="st">&quot;All&quot;</span>,</span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>                          <span class="at">filter_Vegetation =</span> <span class="st">&quot;in&quot;</span>,</span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>                          <span class="at">Endemism =</span> <span class="st">&quot;Endemic&quot;</span>, <span class="at">Origin =</span> <span class="st">&quot;Native&quot;</span>,</span>
-<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>                          <span class="at">TaxonomicStatus =</span> <span class="st">&quot;Accepted&quot;</span>,</span>
-<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>                          <span class="at">NomenclaturalStatus =</span> <span class="st">&quot;All&quot;</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>                          <span class="at">kingdom =</span> <span class="st">&quot;Plantae&quot;</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>                          <span class="at">group =</span> <span class="st">&quot;All&quot;</span>, <span class="at">subgroup =</span> <span class="st">&quot;All&quot;</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>                          <span class="at">family =</span> <span class="st">&quot;All&quot;</span>, <span class="at">genus =</span> <span class="st">&quot;All&quot;</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>                          <span class="at">lifeForm =</span> <span class="st">&quot;Tree&quot;</span>, <span class="at">filter_lifeForm =</span> <span class="st">&quot;only&quot;</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>                          <span class="at">habitat =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_habitat =</span> <span class="st">&quot;in&quot;</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>                          <span class="at">biome =</span> <span class="st">&quot;Amazon&quot;</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>                          <span class="at">filter_biome =</span> <span class="st">&quot;only&quot;</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>                          <span class="at">state =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_state =</span> <span class="st">&quot;and&quot;</span>,</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>                          <span class="at">vegetation =</span> <span class="st">&quot;All&quot;</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>                          <span class="at">filter_vegetation =</span> <span class="st">&quot;in&quot;</span>,</span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>                          <span class="at">endemism =</span> <span class="st">&quot;Endemic&quot;</span>, <span class="at">origin =</span> <span class="st">&quot;Native&quot;</span>,</span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>                          <span class="at">taxonomicStatus =</span> <span class="st">&quot;Accepted&quot;</span>,</span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>                          <span class="at">nomenclaturalStatus =</span> <span class="st">&quot;All&quot;</span>)</span>
 <span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="co">#Get presence-absence matrix</span></span>
-<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>pam_am <span class="ot">&lt;-</span> <span class="fu">get_pam</span>(<span class="at">data =</span> am_trees, <span class="at">by_Biome =</span> <span class="cn">TRUE</span>, <span class="at">by_State =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>                 <span class="at">by_vegetationType =</span> <span class="cn">FALSE</span>, <span class="at">remove_empty_sites =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>pam_am <span class="ot">&lt;-</span> <span class="fu">get_pam</span>(<span class="at">data =</span> am_trees, <span class="at">by_biome =</span> <span class="cn">TRUE</span>, <span class="at">by_state =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>                 <span class="at">by_vegetation =</span> <span class="cn">FALSE</span>, <span class="at">remove_empty_sites =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a>                 <span class="at">return_richness_summary =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a>                 <span class="at">return_spatial_richness =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>                 <span class="at">return_plot =</span> <span class="cn">TRUE</span>)</span>
@@ -415,13 +415,13 @@ returns a data frame containing the number of species per site.</p>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co"># # A tibble: 7 × 3</span></span>
 <span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#   Biome  States Richness</span></span>
 <span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#   &lt;fct&gt;  &lt;fct&gt;     &lt;dbl&gt;</span></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co"># 1 Amazon AM          599</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co"># 1 Amazon AM          606</span></span>
 <span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co"># 2 Amazon MA           34</span></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co"># 3 Amazon PA          294</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co"># 3 Amazon PA          296</span></span>
 <span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co"># 4 Amazon TO            7</span></span>
 <span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co"># 5 Amazon MT           63</span></span>
 <span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co"># 6 Amazon RR           45</span></span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co"># 7 Amazon AC          109</span></span></code></pre></div>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co"># 7 Amazon AC          107</span></span></code></pre></div>
 <p>If return_spatial_richness is set to TRUE, the function will return a
 SpatVector containing the number of species per site. Additionally, when
 return_plot is also set to TRUE, the function returns a plot.

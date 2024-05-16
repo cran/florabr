@@ -2,26 +2,26 @@
 % Please edit documentation in R/get_florabr.R
 \name{get_florabr}
 \alias{get_florabr}
-\title{Download the latest version of Brazilian Flora 2020 database}
+\title{Download the latest version of Flora e Funga do Brasil database}
 \usage{
 get_florabr(output_dir, data_version = "latest",
-                 solve_incongruences = TRUE, overwrite = TRUE,
+                 solve_discrepancy = FALSE, overwrite = TRUE,
                  verbose = TRUE)
 }
 \arguments{
 \item{output_dir}{(character) a directory to save the data downloaded from
-Brazilian Flora 2020}
+Flora e Funga do Brasil.}
 
-\item{data_version}{(character) Version of the Brazilian Flora database to
-download. Use "latest" to get the most recent version, updated weekly.
+\item{data_version}{(character) Version of the Flora e Funga do Brasil
+database to download. Use "latest" to get the most recent version, updated weekly.
 Alternatively, specify an older version (e.g., data_version = "393.319").
 Default value is "latest".}
 
-\item{solve_incongruences}{Resolve inconsistencies between species and
-subspecies/varieties  information. When set to TRUE (default), species
+\item{solve_discrepancy}{Resolve discrepancies between species and
+subspecies/varieties  information. When set to TRUE, species
 information is updated based on unique data from varieties and subspecies.
 For example, if a subspecies occurs in a certain biome, it implies that the
-species also occurs in that biome.}
+species also occurs in that biome. Default = FALSE.}
 
 \item{overwrite}{(logical) If TRUE, data is overwritten. Default = TRUE.}
 
@@ -30,7 +30,7 @@ execution. Set to TRUE to enable display, or FALSE to run silently.
 Default = TRUE.}
 }
 \value{
-The function downloads the latest version of the Brazilian Flora 2020
+The function downloads the latest version of the Flora e Funga do Brasil
 database from the official source. It then merges the information into a
 single data.frame, containing details on species, taxonomy, occurrence,
 and other relevant data.
@@ -39,8 +39,8 @@ directory. The data is saved in a format that allows easy loading using the
 \code{\link{load_florabr}} function for further analysis in R.
 }
 \description{
-This function downloads the latest or an older version of Brazilian Flora
-2020 database, merges the information into a single data.frame, and saves
+This function downloads the latest or an older version of Flora e Funga do
+Brasil database, merges the information into a single data.frame, and saves
 this data.frame in the specified directory.
 }
 \examples{
@@ -52,10 +52,10 @@ my_dir <- file.path(file.path(tempdir(), "florabr"))
 dir.create(my_dir)
 #Download, merge and save data
 get_florabr(output_dir = my_dir, data_version = "latest",
-            solve_incongruences = TRUE, overwrite = TRUE, verbose = TRUE)
+            solve_discrepancy = FALSE, overwrite = TRUE, verbose = TRUE)
 }
 }
 \references{
-Brazilian Flora 2020. Jardim Botânico do Rio de Janeiro. Available at:
+Flora e Funga do Brasil. Jardim Botânico do Rio de Janeiro. Available at:
 http://floradobrasil.jbrj.gov.br/
 }

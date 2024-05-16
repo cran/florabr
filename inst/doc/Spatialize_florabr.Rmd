@@ -2,7 +2,7 @@
 title: "3. Using florabr to flag erroneous records"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Using florabr to flag erroneous records}
+  %\VignetteIndexEntry{3. Using florabr to flag erroneous records}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -38,19 +38,19 @@ library(terra)
 bf <- load_florabr(data_dir = my_dir,
                    data_version = "Latest_available",
                    type = "short") #short version
-#> Loading version 393.389
+#> Loading version 393.401
 ```
 
 
 ## Get spatial polygons of species distribution
-Brazilian Flora 2020 provides information on the federal states and biomes with confirmed occurrences of the species in Brazil. The `get_spat_occ` function extracts these information and return Spatial polygons (SpatVectors) representing the distribution of the specie. We can choose getting the Spatialvector of the federal states, biomes and the intersection between states and biomes.
+Flora e Funga do Brasil provides information on the federal states and biomes with confirmed occurrences of the species in Brazil. The `get_spat_occ` function extracts these information and return Spatial polygons (SpatVectors) representing the distribution of the specie. We can choose getting the Spatialvector of the federal states, biomes and the intersection between states and biomes.
 
 ```{r}
 #Example species
 spp <- c("Araucaria angustifolia", "Adesmia paranensis")
 #Get spatial polygons
 spp_spt <- get_spat_occ(data = bf, species = spp,
-                       State = TRUE, Biome = TRUE, intersection = TRUE,
+                       state = TRUE, biome = TRUE, intersection = TRUE,
                        verbose = TRUE)
 #> Getting states of Araucaria angustifolia 
 #> Getting biomes of Araucaria angustifolia 
@@ -64,17 +64,17 @@ The SpatVectors are stored in a nested list by species:
 
 ```{r}
 par(mfrow = c(3, 2), mar = c(2, 0, 2, 0)) 
-plot(spp_spt$`Araucaria angustifolia`$States,
+plot(spp_spt$`Araucaria angustifolia`$states,
      main = paste0(names(spp_spt)[[1]], " - States"), mar = NA)
-plot(spp_spt$`Araucaria angustifolia`$Biomes,
+plot(spp_spt$`Araucaria angustifolia`$biomes,
      main = paste0(names(spp_spt)[[1]], " - Biomes"), mar = NA)
-plot(spp_spt$`Araucaria angustifolia`$States_Biomes,
+plot(spp_spt$`Araucaria angustifolia`$states_biomes,
      main = paste0(names(spp_spt)[[1]], " - Intersection"), mar = NA)
-plot(spp_spt$`Adesmia paranensis`$States,
+plot(spp_spt$`Adesmia paranensis`$states,
      main = paste0(names(spp_spt)[[2]], " - States"), mar = NA)
-plot(spp_spt$`Adesmia paranensis`$Biomes,
+plot(spp_spt$`Adesmia paranensis`$biomes,
      main = paste0(names(spp_spt)[[2]], " - Biomes"), mar = NA)
-plot(spp_spt$`Adesmia paranensis`$States_Biomes,
+plot(spp_spt$`Adesmia paranensis`$states_biomes,
      main = paste0(names(spp_spt)[[2]], " - Intersection"), mar = NA)
 ```
 
@@ -143,12 +143,12 @@ br_biomes <- terra::subset(br_biomes,
                            br_biomes$name_biome != "Sistema Costeiro")
 ```
 
-The names of the biomes are in Portuguese. We need to translate Amazonia and Mata Atlantica to English to match with the names in Brazilian Flora database:
+The names of the biomes are in Portuguese. We need to translate Amazonia and Mata Atlantica to English to match with the names in Flora e Funga do Brasil:
 
 ```{r, results='hide'}
 #See names of biomes
 br_biomes$name_biome
-#Names that must be in the Spatvector to match with Brazilian Flora:
+#Names that must be in the Spatvector to match with Flora e Funga do Brasil:
 biomes$name_biome
 #> [1] "Amazônia"       "Caatinga"       "Cerrado"        "Mata Atlântica"
 #> [5] "Pampa"          "Pantanal"
@@ -162,10 +162,10 @@ Now, the SpatVector of biomes is also ready to use. Let's see the difference whe
 
 ```{r}
 spp_spt_2 <- get_spat_occ(data = bf, species = spp,
-                State = TRUE, Biome = TRUE, intersection = TRUE,
-                State_vect = br_states, #The non-simplified Spatvector
+                state = TRUE, biome = TRUE, intersection = TRUE,
+                state_vect = br_states, #The non-simplified Spatvector
                 state_column = "abbrev_state", #Column name with states acronyms
-                Biome_vect = br_biomes, #The non-simplified Spatvector
+                biome_vect = br_biomes, #The non-simplified Spatvector
                 biome_column = "name_biome", #Column name with names of biomes
                 verbose = TRUE)
 ```
@@ -174,13 +174,13 @@ See the difference: now, the polygons representing the distribution of species i
 
 ```{r}
 par(mfrow = c(2, 2), mar = c(2, 2, 2, 2)) 
-plot(spp_spt$`Araucaria angustifolia`$States,
+plot(spp_spt$`Araucaria angustifolia`$states,
      main = paste0(names(spp_spt)[[1]], " - States simplified"), mar = NA)
-plot(spp_spt_2$`Araucaria angustifolia`$States,
+plot(spp_spt_2$`Araucaria angustifolia`$states,
      main = paste0(names(spp_spt)[[1]], " - States non-simplified"), mar = NA)
-plot(spp_spt$`Araucaria angustifolia`$Biomes,
+plot(spp_spt$`Araucaria angustifolia`$biomes,
      main = paste0(names(spp_spt)[[1]], " - Biomes simplified"), mar = NA)
-plot(spp_spt$`Araucaria angustifolia`$Biomes,
+plot(spp_spt$`Araucaria angustifolia`$biomes,
      main = paste0(names(spp_spt)[[1]], " - Biomes non-simplified"), mar = NA)
 ```
 ```{r IMG04, eval=TRUE, echo = FALSE}
@@ -190,12 +190,12 @@ knitr::include_graphics("vignettes_img/IMG04.png")
 The choose between using the simplified version (default) or using a personal e more complex polygons depends on the objectives and resolution of your work. For a objective that depends on more fine resolution, we suggest to use more complex polygons that represent better the real shapes and boundaries of states and biomes.
 
 
-## Filtering occurrence records using distribution information in Brazilian Flora
+## Filtering occurrence records using distribution information in Flora e Funga do Brasil
 
 Georeferencing errors in online species records can introduce significant bias into ecological and biogeographical research findings. Some R packages, as `CoordinateCleaner`, help to flagging common spatial errors in biological collection data, for example, records of terrestrial organism that fall in the sea or were assigned to capital and province centroids.
-Since the distributions of species in Brazilian Flora are based on the expertise of taxonomists, it represents a valuable information to add an additional step on checking the validity of occurrence records got from online databases (as GBIF or SpeciesLink). 
+Since the distributions of species in Flora e Funga do Brasil are based on the expertise of taxonomists, it represents a valuable information to add an additional step on checking the validity of occurrence records got from online databases (as GBIF or SpeciesLink). 
 The `filter_florabr` function automatized this flagging. You can use the function to flag and/or remove:
-* Records that fall outside the states and biomes which confirmed occurrence according to Brazilian Flora.
+* Records that fall outside the states and biomes which confirmed occurrence according to Flora e Funga do Brasil.
 * For species endemic to Brazil, records that falls in other countries.
 
 As example, let's use the occurrence records of two species. *Abatia americana* is an endemic shrub with confirmed occurrences in 4 states (ES, MG, RJ and SP) and two biomes (Atlantic Forest and Cerrado). *Araucaria angustifolia* is a non-endemic tree that in Brazil has confirmed occurrences in 6 states (MG, PR, RJ, RS, SC and SP) and two biomes (Atlantic Forest and Pampa). Let's plot these information using the function `get_spat_occ`:
@@ -203,16 +203,16 @@ As example, let's use the occurrence records of two species. *Abatia americana* 
 ```{r}
 my_spp <- c("Abatia americana", "Araucaria angustifolia")
 pol_spp <- get_spat_occ(data = bf, species = my_spp,
-                       State = TRUE, Biome = TRUE, intersection = TRUE,
+                       state = TRUE, biome = TRUE, intersection = TRUE,
                        verbose = TRUE)
 par(mfrow = c(2, 2), mar = c(2, 0, 2, 0)) 
-plot(pol_spp$`Abatia americana`$States,
+plot(pol_spp$`Abatia americana`$states,
      main = paste0(names(pol_spp)[[1]], " - States"), mar = NA)
-plot(pol_spp$`Abatia americana`$Biomes,
+plot(pol_spp$`Abatia americana`$biomes,
      main = paste0(names(pol_spp)[[1]], " - Biomes"), mar = NA)
-plot(pol_spp$`Araucaria angustifolia`$States,
+plot(pol_spp$`Araucaria angustifolia`$states,
      main = paste0(names(pol_spp)[[2]], " - States"), mar = NA)
-plot(pol_spp$`Araucaria angustifolia`$Biomes,
+plot(pol_spp$`Araucaria angustifolia`$biomes,
      main = paste0(names(pol_spp)[[2]], " - Biomes"), mar = NA)
 ```
 ```{r IMG05, eval=TRUE, echo = FALSE}
@@ -239,11 +239,11 @@ Let's check if there are records outside of the species' natural ranges consider
 
 ```{r}
 occ_check <- filter_florabr(data = bf, occ = occ,
-                    by_State = TRUE, buffer_State = 20,
-                    by_Biome = TRUE, buffer_Biome = 20,
-                    by_Endemism = TRUE, Buffer_Brazil = 20,
-                    State_vect = NULL,
-                    Biome_vect = NULL, BR_vect = NULL,
+                    by_state = TRUE, buffer_state = 20,
+                    by_biome = TRUE, buffer_biome = 20,
+                    by_endemism = TRUE, buffer_brazil = 20,
+                    state_vect = NULL,
+                    biome_vect = NULL, br_vect = NULL,
                     value = "flag&clean", keep_columns = TRUE,
                     verbose = FALSE)
 #> Returning list with flagged and cleaned occurrences
@@ -271,8 +271,8 @@ abatia_occ <- subset(occ_check$flagged,
 abatia_occ <- vect(abatia_occ, geom = c("x", "y"))
 
 #Iteractive plot
-mapview(pol_spp$`Abatia americana`$States) +
-  mapview(abatia_occ, zcol = "Inside_State",
+mapview(pol_spp$`Abatia americana`$states) +
+  mapview(abatia_occ, zcol = "inside_state",
           col.regions = c("red", "green"))
 ```
 ```{r IMG06, eval=TRUE, echo = FALSE, fig.pos="H", out.width="90%"}
@@ -283,8 +283,8 @@ We can see the same with biomes: green dots represents records that passed in th
 
 ```{r, fig.width= 9}
 #Iteractive plot
-mapview(pol_spp$`Abatia americana`$Biomes) +
-  mapview(abatia_occ, zcol = "Inside_Biome",
+mapview(pol_spp$`Abatia americana`$biomes) +
+  mapview(abatia_occ, zcol = "inside_biome",
           col.regions = c("red", "green"))
 
 ```
@@ -301,7 +301,7 @@ br <- geobr::read_country()
 ```{r, warning=FALSE}
 #Iteractive plot
 mapview(br) +
-  mapview(abatia_occ, zcol = "Inside_BR",
+  mapview(abatia_occ, zcol = "inside_br",
           col.regions = c("red", "green"))
 ```
 ```{r IMG08, eval=TRUE, echo = FALSE, fig.pos="H", out.width="90%"}

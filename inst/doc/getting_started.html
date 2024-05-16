@@ -342,42 +342,50 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<div id="what-is-brazilian-flora-2020" class="section level3">
-<h3>What is Brazilian Flora 2020?</h3>
-<p>Brazilian Flora 2020 is the most comprehensive work to reliably
-document Brazilian plant diversity. It involves the work of hundreds of
-taxonomists, integrating data from plant and fungi collected in Brazil
-during the last two centuries. The database contains detailed and
-standardized morphological descriptions, illustrations, nomenclatural
-data, geographic distribution, and keys for the identification of all
-native and non-native plants found in Brazil.</p>
+<div id="what-is-flora-e-funga-do-brasil" class="section level3">
+<h3>What is Flora e Funga do Brasil?</h3>
+<p>Flora e Funga do Brasil is the most comprehensive work to reliably
+document Brazilian plant, fungi and algae diversity. It involves the
+work of hundreds of taxonomists, integrating data from plant(including
+algae) and fungi collected in Brazil during the last two centuries. The
+database contains detailed and standardized morphological descriptions,
+illustrations, nomenclatural data, geographic distribution, and keys for
+the identification of all native and non-native plants and fungi found
+in Brazil.</p>
 <p>The florabr package includes a collection of functions designed to
-retrieve, filter and spatialize data from the <a href="https://floradobrasil.jbrj.gov.br/reflora/listaBrasil/PrincipalUC/PrincipalUC.do?lingua=en#CondicaoTaxonCP">Brazilian
-Flora 2020 dataset</a>.</p>
+retrieve, filter and spatialize data from the <a href="https://floradobrasil.jbrj.gov.br/reflora/listaBrasil/PrincipalUC/PrincipalUC.do?lingua=en#CondicaoTaxonCP">Flora
+e Funga do Brasil dataset</a>.</p>
 </div>
 </div>
 <div id="overview-of-the-functions" class="section level2">
 <h2>Overview of the functions:</h2>
 <ul>
-<li><code>get_florabr</code>: download the latest or an older version of
-Brazilian Flora 2020 database.</li>
-<li><code>check_version</code>: check if you have the latest version of
-Brazilian Flora data available in a directory.</li>
-<li><code>load_florabr</code>: load Brazilian Flora database.</li>
-<li><code>get_attributes</code>: display all the options available to
+<li><code>get_florabr()</code>: download the latest or an older version
+of Flora e Funga do Brasil database.</li>
+<li><code>check_version()</code>: check if you have the latest version
+of Flora e Funga do Brasil data available in a directory.</li>
+<li><code>load_florabr()</code>: load Flora e Funga do Brasil
+database.</li>
+<li><code>solve_discrepancies()</code>: Resolve discrepancies between
+species and subspecies/varieties information in the original
+dataset.</li>
+<li><code>get_attributes()</code>: display all the options available to
 filter species by its characteristics.</li>
-<li><code>select_species</code>: filter species based on its
+<li><code>select_species()</code>: filter species based on its
 characteristics and distribution.</li>
-<li><code>get_binomial</code>: extract the binomial name (Genus +
+<li><code>get_binomial()</code>: extract the binomial name (Genus +
 specific epithet) from a Scientific Name.</li>
-<li><code>check_names</code>: check if the species names are
+<li><code>get_synonym()</code>: Retrieve synonyms for species.</li>
+<li><code>check_names()</code>: check if the species names are
 correct.</li>
-<li><code>subset_species</code>: subset a list of species from Brazilian
-Flora 2020.</li>
-<li><code>get_spat_occ</code>: get Spatial polygons (SpatVectors) of
+<li><code>subset_species()</code>: subset a list of species from Flora e
+Funga do Brasil.</li>
+<li><code>get_spat_occ()</code>: get Spatial polygons (SpatVectors) of
 species based on its distribution.</li>
-<li><code>filter_florabr</code>: removes or flags records outside of the
-species’ natural ranges.</li>
+<li><code>filter_florabr()</code>: removes or flags records outside of
+the species’ natural ranges.</li>
+<li><code>get_pam()</code>: get a presence-absence matrix of species
+based on its distribution.</li>
 </ul>
 </div>
 <div id="installation" class="section level2">
@@ -401,12 +409,13 @@ species’ natural ranges.</li>
 <span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="fu">library</span>(florabr)</span></code></pre></div>
 </div>
 </div>
-<div id="get-data-from-brazilian-flora" class="section level2">
-<h2>Get data from Brazilian Flora</h2>
-<p>All data included in the Brazilian Flora (i.e., nomenclature, life
-form, and distribution) are stored in Darwin Core Archive data sets,
-which is updated weekly. Before downloading the data available in the
-Brazilian Flora 2020, we need to create a folder to save the data:</p>
+<div id="get-data-from-flora-e-funga-do-brasil" class="section level2">
+<h2>Get data from Flora e Funga do Brasil</h2>
+<p>All data included in the Flora e Funga do Brasil (i.e., nomenclature,
+life form, and distribution) are stored in Darwin Core Archive data
+sets, which is updated weekly. Before downloading the data available in
+the Flora e Funga do Brasil, we need to create a folder to save the
+data:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co">#Creating a folder in a temporary directory</span></span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co">#Replace &#39;file.path(tempdir(), &quot;florabr&quot;)&#39; by a path folder to be create in </span></span>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#your computer</span></span>
@@ -419,14 +428,14 @@ the most recent version of the data:</p>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>            <span class="at">overwrite =</span> T) <span class="co">#Overwrite data, if it exists</span></span></code></pre></div>
 <p>The function will take a few seconds to download the data and a few
 minutes to merge the datasets into a single data.frame. Upon successful
-completion, you will find a folder named with the version of Brazilian
-Flora. This folder contains the downloaded raw dataset (TXT files in
-Portuguese) and a file named
+completion, you will find a folder named with the version of Flora e
+Funga do Brasil. This folder contains the downloaded raw dataset (TXT
+files in Portuguese) and a file named
 <strong>CompleteBrazilianFlora.rds</strong>. The latter represents the
 finalized dataset, merged and translated into English.</p>
 <p>You also have the option to download an older, specific version of
-the Brazilian Flora dataset. To explore the available versions, please
-refer to <a href="https://ipt.jbrj.gov.br/jbrj/resource?r=lista_especies_flora_brasil">this
+the Flora e Funga do Brasil dataset. To explore the available versions,
+please refer to <a href="https://ipt.jbrj.gov.br/jbrj/resource?r=lista_especies_flora_brasil">this
 link</a>. For downloading a particular version, simply replace ‘latest’
 with the desired version number. For example:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">get_florabr</span>(<span class="at">output_dir =</span> my_dir, <span class="co">#directory to save the data</span></span>
@@ -436,10 +445,10 @@ with the desired version number. For example:</p>
 within the designated directory.</p>
 <p>To view the available versions in your specified directory, run:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">check_version</span>(<span class="at">data_dir =</span> my_dir)</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#&gt; You have the following versions of Brazilian Flora:</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#&gt; You have the following versions of Flora e Funga do Brasil:</span></span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt;  393.385</span></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt; 393.399 </span></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt;  It includes the latest version:  393.399</span></span></code></pre></div>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt;  393.401 </span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt;  It includes the latest version:  393.401</span></span></code></pre></div>
 </div>
 <div id="loading-the-data" class="section level2">
 <h2>Loading the data</h2>
@@ -449,7 +458,7 @@ the data into your environment. To achieve this, utilize the
 automatically search for the latest available version in your directory.
 However, you have the option to specify a particular version using the
 <em>data_version</em> parameter. Additionally, you can choose between
-two versions of the data: the ‘short’ version (containing the 19 columns
+two versions of the data: the ‘short’ version (containing the 23 columns
 required for run the other functions of the package) or the ‘complete’
 version (with all original 39 columns). The function imports the ‘short’
 version by default.</p>
@@ -457,15 +466,16 @@ version by default.</p>
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>bf <span class="ot">&lt;-</span> <span class="fu">load_florabr</span>(<span class="at">data_dir =</span> my_dir,</span>
 <span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>                   <span class="at">data_version =</span> <span class="st">&quot;Latest_available&quot;</span>,</span>
 <span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>                   <span class="at">type =</span> <span class="st">&quot;short&quot;</span>) <span class="co">#short</span></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#&gt; Loading version 393.399</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#&gt; Loading version 393.401</span></span>
 <span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="fu">colnames</span>(bf) <span class="co">#See variables from short version</span></span>
 <span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#&gt;  [1] &quot;species&quot;             &quot;scientificName&quot;      &quot;acceptedName&quot;       </span></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co">#&gt;  [4] &quot;kingdom&quot;             &quot;Group&quot;               &quot;Subgroup&quot;           </span></span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co">#&gt;  [7] &quot;family&quot;              &quot;genus&quot;               &quot;lifeForm&quot;           </span></span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="co">#&gt; [10] &quot;habitat&quot;             &quot;Biome&quot;               &quot;States&quot;             </span></span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="co">#&gt; [13] &quot;vegetationType&quot;      &quot;Origin&quot;              &quot;Endemism&quot;           </span></span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co">#&gt; [16] &quot;taxonomicStatus&quot;     &quot;nomenclaturalStatus&quot; &quot;vernacularName&quot;     </span></span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="co">#&gt; [19] &quot;taxonRank&quot;</span></span></code></pre></div>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co">#&gt;  [4] &quot;kingdom&quot;             &quot;group&quot;               &quot;subgroup&quot;</span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co">#&gt;  [7] &quot;phylum&quot;              &quot;class&quot;               &quot;order&quot;             </span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="co">#&gt; [10] &quot;family&quot;              &quot;genus&quot;               &quot;lifeForm&quot;           </span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="co">#&gt; [13] &quot;habitat&quot;             &quot;biome&quot;               &quot;states&quot;             </span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co">#&gt; [16] &quot;vegetation&quot;          &quot;origin&quot;              &quot;endemism&quot;           </span></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="co">#&gt; [19] &quot;taxonomicStatus&quot;     &quot;nomenclaturalStatus&quot; &quot;vernacularName&quot;     </span></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="co">#&gt; [22] &quot;taxonRank&quot;           &quot;id&quot;</span></span></code></pre></div>
 <p>Note that the complete version has 20 more columns:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co">#Complete version</span></span>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>bf_complete <span class="ot">&lt;-</span> <span class="fu">load_florabr</span>(<span class="at">data_dir =</span> my_dir,</span>
@@ -475,8 +485,8 @@ version by default.</p>
 <span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="fu">colnames</span>(bf_complete) <span class="co">#See variables from complete version</span></span>
 <span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#&gt;  [1] &quot;id&quot;                       &quot;taxonID&quot;                 </span></span>
 <span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co">#&gt;  [3] &quot;acceptedNameUsageID&quot;      &quot;parentNameUsageID&quot;       </span></span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co">#&gt;  [5] &quot;originalNameUsageID&quot;      &quot;Group&quot;                   </span></span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co">#&gt;  [7] &quot;Subgroup&quot;                 &quot;species&quot;                 </span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co">#&gt;  [5] &quot;originalNameUsageID&quot;      &quot;group&quot;                   </span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co">#&gt;  [7] &quot;subgroup&quot;                 &quot;species&quot;                 </span></span>
 <span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="co">#&gt;  [9] &quot;acceptedName&quot;             &quot;scientificName&quot;          </span></span>
 <span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="co">#&gt; [11] &quot;acceptedNameUsage&quot;        &quot;parentNameUsage&quot;         </span></span>
 <span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="co">#&gt; [13] &quot;namePublishedIn&quot;          &quot;namePublishedInYear&quot;     </span></span>
@@ -488,9 +498,9 @@ version by default.</p>
 <span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a><span class="co">#&gt; [25] &quot;scientificNameAuthorship&quot; &quot;taxonomicStatus&quot;         </span></span>
 <span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="co">#&gt; [27] &quot;nomenclaturalStatus&quot;      &quot;vernacularName&quot;          </span></span>
 <span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="co">#&gt; [29] &quot;lifeForm&quot;                 &quot;habitat&quot;                 </span></span>
-<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a><span class="co">#&gt; [31] &quot;vegetationType&quot;           &quot;Origin&quot;                  </span></span>
-<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a><span class="co">#&gt; [33] &quot;Endemism&quot;                 &quot;Biome&quot;                   </span></span>
-<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a><span class="co">#&gt; [35] &quot;States&quot;                   &quot;countryCode&quot;             </span></span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a><span class="co">#&gt; [31] &quot;vegetation&quot;               &quot;origin&quot;                  </span></span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a><span class="co">#&gt; [33] &quot;endemism&quot;                 &quot;biome&quot;                   </span></span>
+<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a><span class="co">#&gt; [35] &quot;states&quot;                   &quot;countryCode&quot;             </span></span>
 <span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a><span class="co">#&gt; [37] &quot;modified&quot;                 &quot;bibliographicCitation&quot;   </span></span>
 <span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a><span class="co">#&gt; [39] &quot;references&quot;</span></span></code></pre></div>
 <p>If you want to save the datasets to open with an external editor
@@ -498,6 +508,69 @@ version by default.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="at">x =</span> bf,</span>
 <span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>          <span class="at">file =</span> <span class="fu">file.path</span>(my_dir, <span class="st">&quot;BrazilianFlora.csv&quot;</span>),</span>
 <span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>          <span class="at">row.names =</span> F)</span></code></pre></div>
+</div>
+<div id="solve-discrepancies" class="section level2">
+<h2>Solve discrepancies</h2>
+<p>Discrepancies may arise in the original dataset, particularly between
+species and subspecies/varieties information. One common scenario is
+when a species is reported in one biome (e.g., Amazon), while a
+subspecies or variety of the same species is found in another biome
+(e.g., Cerrado). The <code>solve_discrepancies()</code> function
+rectifies such discrepancies by considering distribution (states,
+biomes, and vegetation), life form, and habitat. For example, if a
+subspecies is documented in a specific biome, it suggests that the
+species also exists in that biome You can resolve these discrepancies by
+setting <em>solve_discrepancy = FALSE</em> in
+<code>get_florabr()</code>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="fu">get_florabr</span>(output_dir, <span class="at">data_version =</span> <span class="st">&quot;latest&quot;</span>,</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>            <span class="at">solve_discrepancy =</span> <span class="cn">TRUE</span>, <span class="co">#Default is false</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>            <span class="at">overwrite =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>            <span class="at">verbose =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>By resolving discrepancies internally in get_florabr(), the dataset
+loaded with load_florabr() will already have these issues addressed. You
+can verify if the dataset has resolved discrepancies by examining its
+attributes:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">attr</span>(bf, <span class="st">&quot;solve_discrepancies&quot;</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="co">#&gt; FALSE</span></span></code></pre></div>
+<p>Since we downloaded the data with the default option
+(solve_discrepancy = FALSE), the loaded dataset may contain
+discrepancies. For instance, let’s explore the biomes with confirmed
+occurrences of species and subspecies of <em>Acianthera
+ochreata</em>:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>acianthera <span class="ot">&lt;-</span> <span class="fu">subset_species</span>(<span class="at">data =</span> bf, <span class="at">species =</span> <span class="st">&quot;Acianthera ochreata&quot;</span>,</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>                             <span class="at">include_subspecies =</span> <span class="cn">TRUE</span>, <span class="at">include_variety =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="co">#Check biomes with confirmed occurrence</span></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>acianthera[,<span class="fu">c</span>(<span class="st">&quot;scientificName&quot;</span>, <span class="st">&quot;taxonRank&quot;</span>, <span class="st">&quot;biome&quot;</span>)]</span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co">#&gt;                                                          scientificName  taxonRank                            biome</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="co">#&gt; 8134                  Acianthera ochreata (Lindl.) Pridgeon &amp; M.W.Chase    Species                 Caatinga;Cerrado</span></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co">#&gt; 24923    Acianthera ochreata subsp. cylindrifolia (Borba &amp; Semir) Borba Subspecies                          Cerrado</span></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="co">#&gt; 29550 Acianthera ochreata (Lindl.) Pridgeon &amp; M.W.Chase subsp. ochreata Subspecies Atlantic_Forest;Caatinga;Cerrado</span></span></code></pre></div>
+<p>We observe that the species <em>Acianthera ochreata</em> has
+confirmed occurrences in two biomes: Caatinga and Cerrado. However,
+there are two subspecies of <em>A. ochreata</em>: <em>A. ochreata subsp.
+cylindrifolia</em>, confirmed in the Cerrado, and <em>Acianthera
+ochreata subsp. ochreata</em>, confirmed in the Caatinga, Cerrado, and
+Atlantic Forest. Through the solve_discrepancies() function, we can
+retrieve information from subspecies and varieties with accepted names
+to update the information of the related species</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>bf_solved <span class="ot">&lt;-</span> <span class="fu">solve_discrepancies</span>(bf)</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="co">#See attribute</span></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="fu">attr</span>(bf_solved, <span class="st">&quot;solve_discrepancies&quot;</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="co">#&gt; TRUE</span></span></code></pre></div>
+<p>In this new dataset with discrepancies solved, let’s examine the
+biomes where <em>Acianthera ochreata</em> has confirmed occurrences:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>acianthera_solved <span class="ot">&lt;-</span> <span class="fu">subset_species</span>(<span class="at">data =</span> bf_solved, <span class="at">species =</span> <span class="st">&quot;Acianthera ochreata&quot;</span>,</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>                             <span class="at">include_subspecies =</span> <span class="cn">TRUE</span>, <span class="at">include_variety =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="co">#Check biomes with confirmed occurrence</span></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>acianthera_solved[,<span class="fu">c</span>(<span class="st">&quot;scientificName&quot;</span>, <span class="st">&quot;taxonRank&quot;</span>, <span class="st">&quot;biome&quot;</span>)]</span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="co">#&gt;                                                          scientificName  taxonRank                            biome</span></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="co">#&gt; 16108                 Acianthera ochreata (Lindl.) Pridgeon &amp; M.W.Chase    Species Atlantic_Forest;Caatinga;Cerrado</span></span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co">#&gt; 24923    Acianthera ochreata subsp. cylindrifolia (Borba &amp; Semir) Borba Subspecies                          Cerrado</span></span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="co">#&gt; 29550 Acianthera ochreata (Lindl.) Pridgeon &amp; M.W.Chase subsp. ochreata Subspecies Atlantic_Forest;Caatinga;Cerrado</span></span></code></pre></div>
+<p>Now, we can see that the biomes with confirmed occurrences of the
+species <em>A. ochreata</em> are updated to Caatinga, Cerrado, and
+Atlantic Forest (the latter retrieved from the subspecies).</p>
 </div>
 
 

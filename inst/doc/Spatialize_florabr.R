@@ -1,4 +1,4 @@
-## ---- include = FALSE---------------------------------------------------------
+## ----include = FALSE----------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 #              data_version = "latest", #get the most recent version available
 #              overwrite = T) #Overwrite data, if it exists
 
-## ---- message=FALSE, warning=F------------------------------------------------
+## ----message=FALSE, warning=F-------------------------------------------------
 #  library(florabr)
 #  library(terra)
 #  #Folder where you stored the data with the function get_florabr()
@@ -24,14 +24,14 @@ knitr::opts_chunk$set(
 #  bf <- load_florabr(data_dir = my_dir,
 #                     data_version = "Latest_available",
 #                     type = "short") #short version
-#  #> Loading version 393.389
+#  #> Loading version 393.401
 
 ## -----------------------------------------------------------------------------
 #  #Example species
 #  spp <- c("Araucaria angustifolia", "Adesmia paranensis")
 #  #Get spatial polygons
 #  spp_spt <- get_spat_occ(data = bf, species = spp,
-#                         State = TRUE, Biome = TRUE, intersection = TRUE,
+#                         state = TRUE, biome = TRUE, intersection = TRUE,
 #                         verbose = TRUE)
 #  #> Getting states of Araucaria angustifolia
 #  #> Getting biomes of Araucaria angustifolia
@@ -42,17 +42,17 @@ knitr::opts_chunk$set(
 
 ## -----------------------------------------------------------------------------
 #  par(mfrow = c(3, 2), mar = c(2, 0, 2, 0))
-#  plot(spp_spt$`Araucaria angustifolia`$States,
+#  plot(spp_spt$`Araucaria angustifolia`$states,
 #       main = paste0(names(spp_spt)[[1]], " - States"), mar = NA)
-#  plot(spp_spt$`Araucaria angustifolia`$Biomes,
+#  plot(spp_spt$`Araucaria angustifolia`$biomes,
 #       main = paste0(names(spp_spt)[[1]], " - Biomes"), mar = NA)
-#  plot(spp_spt$`Araucaria angustifolia`$States_Biomes,
+#  plot(spp_spt$`Araucaria angustifolia`$states_biomes,
 #       main = paste0(names(spp_spt)[[1]], " - Intersection"), mar = NA)
-#  plot(spp_spt$`Adesmia paranensis`$States,
+#  plot(spp_spt$`Adesmia paranensis`$states,
 #       main = paste0(names(spp_spt)[[2]], " - States"), mar = NA)
-#  plot(spp_spt$`Adesmia paranensis`$Biomes,
+#  plot(spp_spt$`Adesmia paranensis`$biomes,
 #       main = paste0(names(spp_spt)[[2]], " - Biomes"), mar = NA)
-#  plot(spp_spt$`Adesmia paranensis`$States_Biomes,
+#  plot(spp_spt$`Adesmia paranensis`$states_biomes,
 #       main = paste0(names(spp_spt)[[2]], " - Intersection"), mar = NA)
 
 ## ----IMG01, eval=TRUE, echo=FALSE---------------------------------------------
@@ -70,7 +70,7 @@ knitr::include_graphics("vignettes_img/IMG01.png")
 ## ----IMG02, eval=TRUE, echo=FALSE---------------------------------------------
 knitr::include_graphics("vignettes_img/IMG02.png")
 
-## ---- warning=FALSE, results='hide', message=FALSE----------------------------
+## ----warning=FALSE, results='hide', message=FALSE-----------------------------
 #  #Install geobr if necessary and load package
 #  if(!require(geobr)){
 #      install.packages("geobr")
@@ -78,7 +78,7 @@ knitr::include_graphics("vignettes_img/IMG02.png")
 #  #Load geobr
 #  library(geobr)
 
-## ---- warning=FALSE, results='hide', message=FALSE----------------------------
+## ----warning=FALSE, results='hide', message=FALSE-----------------------------
 #  br_states <- geobr::read_state(simplified = FALSE)
 #  #Convert br_states from sf to SpatVect
 #  br_states <- vect(br_states)
@@ -95,7 +95,7 @@ knitr::include_graphics("vignettes_img/IMG02.png")
 ## ----IMG03, eval=TRUE, echo = FALSE-------------------------------------------
 knitr::include_graphics("vignettes_img/IMG03.png")
 
-## ---- warning=FALSE, results='hide'-------------------------------------------
+## ----warning=FALSE, results='hide'--------------------------------------------
 #  br_biomes <- geobr::read_biomes()
 #  #Convert br_biomes from sf to SpatVect
 #  br_biomes<- terra::vect(br_biomes)
@@ -103,10 +103,10 @@ knitr::include_graphics("vignettes_img/IMG03.png")
 #  br_biomes <- terra::subset(br_biomes,
 #                             br_biomes$name_biome != "Sistema Costeiro")
 
-## ---- results='hide'----------------------------------------------------------
+## ----results='hide'-----------------------------------------------------------
 #  #See names of biomes
 #  br_biomes$name_biome
-#  #Names that must be in the Spatvector to match with Brazilian Flora:
+#  #Names that must be in the Spatvector to match with Flora e Funga do Brasil:
 #  biomes$name_biome
 #  #> [1] "Amazônia"       "Caatinga"       "Cerrado"        "Mata Atlântica"
 #  #> [5] "Pampa"          "Pantanal"
@@ -117,22 +117,22 @@ knitr::include_graphics("vignettes_img/IMG03.png")
 
 ## -----------------------------------------------------------------------------
 #  spp_spt_2 <- get_spat_occ(data = bf, species = spp,
-#                  State = TRUE, Biome = TRUE, intersection = TRUE,
-#                  State_vect = br_states, #The non-simplified Spatvector
+#                  state = TRUE, biome = TRUE, intersection = TRUE,
+#                  state_vect = br_states, #The non-simplified Spatvector
 #                  state_column = "abbrev_state", #Column name with states acronyms
-#                  Biome_vect = br_biomes, #The non-simplified Spatvector
+#                  biome_vect = br_biomes, #The non-simplified Spatvector
 #                  biome_column = "name_biome", #Column name with names of biomes
 #                  verbose = TRUE)
 
 ## -----------------------------------------------------------------------------
 #  par(mfrow = c(2, 2), mar = c(2, 2, 2, 2))
-#  plot(spp_spt$`Araucaria angustifolia`$States,
+#  plot(spp_spt$`Araucaria angustifolia`$states,
 #       main = paste0(names(spp_spt)[[1]], " - States simplified"), mar = NA)
-#  plot(spp_spt_2$`Araucaria angustifolia`$States,
+#  plot(spp_spt_2$`Araucaria angustifolia`$states,
 #       main = paste0(names(spp_spt)[[1]], " - States non-simplified"), mar = NA)
-#  plot(spp_spt$`Araucaria angustifolia`$Biomes,
+#  plot(spp_spt$`Araucaria angustifolia`$biomes,
 #       main = paste0(names(spp_spt)[[1]], " - Biomes simplified"), mar = NA)
-#  plot(spp_spt$`Araucaria angustifolia`$Biomes,
+#  plot(spp_spt$`Araucaria angustifolia`$biomes,
 #       main = paste0(names(spp_spt)[[1]], " - Biomes non-simplified"), mar = NA)
 
 ## ----IMG04, eval=TRUE, echo = FALSE-------------------------------------------
@@ -141,16 +141,16 @@ knitr::include_graphics("vignettes_img/IMG04.png")
 ## -----------------------------------------------------------------------------
 #  my_spp <- c("Abatia americana", "Araucaria angustifolia")
 #  pol_spp <- get_spat_occ(data = bf, species = my_spp,
-#                         State = TRUE, Biome = TRUE, intersection = TRUE,
+#                         state = TRUE, biome = TRUE, intersection = TRUE,
 #                         verbose = TRUE)
 #  par(mfrow = c(2, 2), mar = c(2, 0, 2, 0))
-#  plot(pol_spp$`Abatia americana`$States,
+#  plot(pol_spp$`Abatia americana`$states,
 #       main = paste0(names(pol_spp)[[1]], " - States"), mar = NA)
-#  plot(pol_spp$`Abatia americana`$Biomes,
+#  plot(pol_spp$`Abatia americana`$biomes,
 #       main = paste0(names(pol_spp)[[1]], " - Biomes"), mar = NA)
-#  plot(pol_spp$`Araucaria angustifolia`$States,
+#  plot(pol_spp$`Araucaria angustifolia`$states,
 #       main = paste0(names(pol_spp)[[2]], " - States"), mar = NA)
-#  plot(pol_spp$`Araucaria angustifolia`$Biomes,
+#  plot(pol_spp$`Araucaria angustifolia`$biomes,
 #       main = paste0(names(pol_spp)[[2]], " - Biomes"), mar = NA)
 
 ## ----IMG05, eval=TRUE, echo = FALSE-------------------------------------------
@@ -171,16 +171,16 @@ knitr::include_graphics("vignettes_img/IMG05.png")
 
 ## -----------------------------------------------------------------------------
 #  occ_check <- filter_florabr(data = bf, occ = occ,
-#                      by_State = TRUE, buffer_State = 20,
-#                      by_Biome = TRUE, buffer_Biome = 20,
-#                      by_Endemism = TRUE, Buffer_Brazil = 20,
-#                      State_vect = NULL,
-#                      Biome_vect = NULL, BR_vect = NULL,
+#                      by_state = TRUE, buffer_state = 20,
+#                      by_biome = TRUE, buffer_biome = 20,
+#                      by_endemism = TRUE, buffer_brazil = 20,
+#                      state_vect = NULL,
+#                      biome_vect = NULL, br_vect = NULL,
 #                      value = "flag&clean", keep_columns = TRUE,
 #                      verbose = FALSE)
 #  #> Returning list with flagged and cleaned occurrences
 
-## ---- warning=FALSE, results='hide'-------------------------------------------
+## ----warning=FALSE, results='hide'--------------------------------------------
 #  #Install mapview if necessary and load package
 #  if(!require(mapview)){
 #      install.packages("geobr")
@@ -188,38 +188,38 @@ knitr::include_graphics("vignettes_img/IMG05.png")
 #  #Load mapview
 #  library(mapview)
 
-## ---- fig.width= 9------------------------------------------------------------
+## ----fig.width= 9-------------------------------------------------------------
 #  #Convert points to spatvector
 #  abatia_occ <- subset(occ_check$flagged,
 #                       occ_check$flagged$species == "Abatia americana")
 #  abatia_occ <- vect(abatia_occ, geom = c("x", "y"))
 #  
 #  #Iteractive plot
-#  mapview(pol_spp$`Abatia americana`$States) +
-#    mapview(abatia_occ, zcol = "Inside_State",
+#  mapview(pol_spp$`Abatia americana`$states) +
+#    mapview(abatia_occ, zcol = "inside_state",
 #            col.regions = c("red", "green"))
 
 ## ----IMG06, eval=TRUE, echo = FALSE, fig.pos="H", out.width="90%"-------------
 knitr::include_graphics("vignettes_img/IMG06.png")
 
-## ---- fig.width= 9------------------------------------------------------------
+## ----fig.width= 9-------------------------------------------------------------
 #  #Iteractive plot
-#  mapview(pol_spp$`Abatia americana`$Biomes) +
-#    mapview(abatia_occ, zcol = "Inside_Biome",
+#  mapview(pol_spp$`Abatia americana`$biomes) +
+#    mapview(abatia_occ, zcol = "inside_biome",
 #            col.regions = c("red", "green"))
 #  
 
 ## ----IMG07, eval=TRUE, echo = FALSE, fig.pos="H", out.width="90%"-------------
 knitr::include_graphics("vignettes_img/IMG07.png")
 
-## ---- results='hide'----------------------------------------------------------
+## ----results='hide'-----------------------------------------------------------
 #  #Get Brazl Polygon
 #  br <- geobr::read_country()
 
-## ---- warning=FALSE-----------------------------------------------------------
+## ----warning=FALSE------------------------------------------------------------
 #  #Iteractive plot
 #  mapview(br) +
-#    mapview(abatia_occ, zcol = "Inside_BR",
+#    mapview(abatia_occ, zcol = "inside_br",
 #            col.regions = c("red", "green"))
 
 ## ----IMG08, eval=TRUE, echo = FALSE, fig.pos="H", out.width="90%"-------------

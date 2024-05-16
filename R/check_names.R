@@ -1,8 +1,8 @@
 #' Check species names
 #'
 #' @description check_names checks if the species names are correct and searches
-#'  for suggestions if the name is misspelled or not found in the Brazilian
-#'  Flora 2020 database.
+#'  for suggestions if the name is misspelled or not found in the Flora e Funga
+#'  do Brasil database
 #'
 #' @param data (data.frame) the data.frame imported with the
 #' \code{\link{load_florabr}} function.
@@ -11,13 +11,13 @@
 #' searching suggestions when the name is misspelled. It can be any value
 #' between 0 and 1. The higher the value, the more suggestions are returned.
 #' For more details, see \code{\link[base:agrep]{agrep}}. Default = 0.1.
-#' @param Kingdom (character) the kingdom to which the species belong. It can
+#' @param kingdom (character) the kingdom to which the species belong. It can
 #' be "Plantae" or "Fungi". Default = "Plantae".
 #'
 #' @return a data.frame with the following columns:
 #' - input_name: the species names informed in species argument
 #' - Spelling: indicates if the species name is Correct (a perfect match with a
-#' species name in the Brazilian Flora 2020), Probably_incorrect
+#' species name in the Flora e Funga do Brasil), Probably_incorrect
 #' (partial match), or Not_found (no match with any species).
 #' - Suggested name: If Spelling is Correct, it is the same as the input_name.
 #' If Spelling is Probably_correct, one or more suggested names are listed,
@@ -34,11 +34,11 @@
 #' accepted name of the specie. If the species name is accepted and correct,
 #' the same as input_name and Suggested_name.
 #' - family: the family of the specie.
-#' @usage check_names(data, species, max_distance = 0.1, Kingdom = "Plantae")
+#' @usage check_names(data, species, max_distance = 0.1, kingdom = "Plantae")
 #' @export
 #' @importFrom utils adist
 #' @references
-#' Brazilian Flora 2020. Jardim Botânico do Rio de Janeiro. Available at:
+#' Flora e Funga do Brasil. Jardim Botânico do Rio de Janeiro. Available at:
 #' http://floradobrasil.jbrj.gov.br/
 #' @examples
 #' data("bf_data", package = "florabr")
@@ -46,7 +46,7 @@
 #' check_names(data = bf_data, species = spp)
 
 check_names <- function(data, species, max_distance = 0.1,
-                           Kingdom = "Plantae"){
+                        kingdom = "Plantae"){
   if (missing(data)) {
     stop("Argument data is not defined")
   }
@@ -72,12 +72,16 @@ check_names <- function(data, species, max_distance = 0.1,
     stop(paste0("Argument max_distance must be a numeric value between 0 and 1"
                 ))
   }
-  if(!(Kingdom %in% c("Plantae", "Fungi"))) {
-    stop(paste0("Argument Kingdom must be 'Plantae' or 'Fungi'"))
+
+  #Change kingdom - First letter to upper case
+  kingdom <- firstup(kingdom)
+
+  if(!(kingdom %in% c("Plantae", "Fungi"))) {
+    stop(paste0("Argument kingdom must be 'Plantae' or 'Fungi'"))
   }
 
   #Continue function...
-  data <- subset(data, data$kingdom == Kingdom & data$taxonRank == "Species")
+  data <- subset(data, data$kingdom == kingdom & data$taxonRank == "Species")
   all_sp <- unique(data$species)
 
   #Get species with correct and incorrect spell

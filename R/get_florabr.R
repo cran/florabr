@@ -1,29 +1,29 @@
-#' Download the latest version of Brazilian Flora 2020 database
+#' Download the latest version of Flora e Funga do Brasil database
 #'
 #' @description
-#' This function downloads the latest or an older version of Brazilian Flora
-#' 2020 database, merges the information into a single data.frame, and saves
+#' This function downloads the latest or an older version of Flora e Funga do
+#' Brasil database, merges the information into a single data.frame, and saves
 #' this data.frame in the specified directory.
 #'
 #'
 #' @param output_dir (character) a directory to save the data downloaded from
-#' Brazilian Flora 2020
-#' @param data_version (character) Version of the Brazilian Flora database to
-#' download. Use "latest" to get the most recent version, updated weekly.
+#' Flora e Funga do Brasil.
+#' @param data_version (character) Version of the Flora e Funga do Brasil
+#' database to download. Use "latest" to get the most recent version, updated weekly.
 #' Alternatively, specify an older version (e.g., data_version = "393.319").
 #' Default value is "latest".
-#' @param solve_incongruences Resolve inconsistencies between species and
-#' subspecies/varieties  information. When set to TRUE (default), species
+#' @param solve_discrepancy Resolve discrepancies between species and
+#' subspecies/varieties  information. When set to TRUE, species
 #' information is updated based on unique data from varieties and subspecies.
 #' For example, if a subspecies occurs in a certain biome, it implies that the
-#' species also occurs in that biome.
+#' species also occurs in that biome. Default = FALSE.
 #' @param overwrite (logical) If TRUE, data is overwritten. Default = TRUE.
 #' @param verbose (logical) Whether to display messages during function
 #' execution. Set to TRUE to enable display, or FALSE to run silently.
 #' Default = TRUE.
 #'
 #' @returns
-#' The function downloads the latest version of the Brazilian Flora 2020
+#' The function downloads the latest version of the Flora e Funga do Brasil
 #' database from the official source. It then merges the information into a
 #' single data.frame, containing details on species, taxonomy, occurrence,
 #' and other relevant data.
@@ -31,7 +31,7 @@
 #' directory. The data is saved in a format that allows easy loading using the
 #' \code{\link{load_florabr}} function for further analysis in R.
 #' @usage get_florabr(output_dir, data_version = "latest",
-#'                  solve_incongruences = TRUE, overwrite = TRUE,
+#'                  solve_discrepancy = FALSE, overwrite = TRUE,
 #'                  verbose = TRUE)
 #' @export
 #'
@@ -40,7 +40,7 @@
 #' @importFrom utils unzip
 #' @importFrom utils read.csv
 #' @references
-#' Brazilian Flora 2020. Jardim Botânico do Rio de Janeiro. Available at:
+#' Flora e Funga do Brasil. Jardim Botânico do Rio de Janeiro. Available at:
 #' http://floradobrasil.jbrj.gov.br/
 #' @examples
 #' \dontrun{
@@ -51,10 +51,10 @@
 #' dir.create(my_dir)
 #' #Download, merge and save data
 #' get_florabr(output_dir = my_dir, data_version = "latest",
-#'             solve_incongruences = TRUE, overwrite = TRUE, verbose = TRUE)
+#'             solve_discrepancy = FALSE, overwrite = TRUE, verbose = TRUE)
 #' }
 get_florabr <- function(output_dir, data_version = "latest",
-                        solve_incongruences = TRUE,
+                        solve_discrepancy = FALSE,
                         overwrite = TRUE,
                         verbose = TRUE) {
   #Set folder
@@ -74,8 +74,8 @@ get_florabr <- function(output_dir, data_version = "latest",
                 class(data_version)))
   }
 
-  if (!is.logical(solve_incongruences)) {
-    stop(paste0("Argument solve_incongruences must be logical, not ",
+  if (!is.logical(solve_discrepancy)) {
+    stop(paste0("Argument solve_discrepancy must be logical, not ",
                 class(overwrite)))
   }
 
@@ -87,7 +87,7 @@ get_florabr <- function(output_dir, data_version = "latest",
 
   #Print message
   if(verbose) {
-  message("Data will be saved in", path_data, "\n") }
+  message("Data will be saved in ", path_data, "\n") }
 
 
   if(data_version != "latest") {
@@ -114,7 +114,7 @@ get_florabr <- function(output_dir, data_version = "latest",
 
   #Print message
   if(!is.null(version_data) & verbose) {
-      message("Downloading version:", version_data, "\n")
+      message("Downloading version: ", version_data, "\n")
 
 
   #Download data
@@ -134,11 +134,11 @@ get_florabr <- function(output_dir, data_version = "latest",
 
   #Merge data
   merge_data(path_data = path_data, version_data = version_data,
-             solve_incongruences = solve_incongruences, verbose = verbose)
+             solve_discrepancy = solve_discrepancy, verbose = verbose)
 
   #Print final message
   if(verbose){
-  message("Data downloaded and merged successfully. Final data saved in",
+  message("Data downloaded and merged successfully. Final data saved in ",
               file.path(path_data, version_data, "CompleteBrazilianFlora.rds"))
   }
 

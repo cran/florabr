@@ -345,7 +345,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>Selecting a list of target species is a common task in
 macroecological and conservation studies. For example, a researcher may
 seek to model the distribution of exclusively endemic trees within a
-designated Biome, a particular state, or a specific vegetation type.</p>
+designated Biome, a particular State, or a specific vegetation type.</p>
 <p>By applying different filters to the database, anyone can obtain a
 verified taxonomic list of Brazilian species of algae, fungi, and plants
 for any Brazilian state, region, biome, and vegetation type.
@@ -366,7 +366,7 @@ vignette???</p>
 <span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>bf <span class="ot">&lt;-</span> <span class="fu">load_florabr</span>(<span class="at">data_dir =</span> my_dir,</span>
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>                   <span class="at">data_version =</span> <span class="st">&quot;Latest_available&quot;</span>,</span>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>                   <span class="at">type =</span> <span class="st">&quot;short&quot;</span>) <span class="co">#short version</span></span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="co">#&gt; Loading version 393.399</span></span></code></pre></div>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="co">#&gt; Loading version 393.401</span></span></code></pre></div>
 </div>
 <div id="selecting-a-list-of-species-1" class="section level2">
 <h2>Selecting a list of species</h2>
@@ -376,110 +376,109 @@ Group, Family, and Genus), characteristics (life form, habitat), and
 distribution (federal states, biomes, vegetation types, and endemism).
 Specifically, you can filter by:</p>
 <ul>
-<li>Kingdom, Group, Subgroup, Family and Genus;</li>
-<li>Lifeform and Habitat;</li>
-<li>Biome, State and VegetationType with confirmed occurrences;</li>
-<li>Endemism (endemic or non-endemic to Brazil);</li>
-<li>Origin (Native, Cultivated or Naturalized in Brazil);</li>
-<li>TaxonomicStatus and NomenclaturalStatus of the species.</li>
+<li>kingdom, group, subgroup, family and genus;</li>
+<li>lifeForm and habitat;</li>
+<li>biome, state and vegetation with confirmed occurrences;</li>
+<li>endemism (endemic or non-endemic to Brazil);</li>
+<li>origin (Native, Cultivated or Naturalized in Brazil);</li>
+<li>taxonomicStatus and nomenclaturalStatus of the species.</li>
 </ul>
 <p>To explore all available options for each filter, use the
 <code>get_attributes()</code> function with the desired attribute. This
-function will provide a data.frame with two columns: one containing the
-available attributes in English (use these attributes) and another with
-the attributes in Portuguese.</p>
+function will provide a data.frame with the available options to use in
+the <code>select_species()</code> function.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co">#Get available options to filter by lifeForm</span></span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">get_attributes</span>(<span class="at">data =</span> bf,</span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>               <span class="at">attribute =</span> <span class="st">&quot;lifeForm&quot;</span>,</span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>               <span class="at">Kingdom =</span> <span class="st">&quot;Plantae&quot;</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt;               lifeForm            Forma_de_vida</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; 1      Aquatic-Benthos          Aquatica-Bentos</span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; 2      Aquatic-Neuston         Aquatica-Neuston</span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; 3     Aquatic-Plankton        Aquatica-Plancton</span></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt; 4                Shrub                  Arbusto</span></span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt; 5                 Tree                   Arvore</span></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">#&gt; 6               Bamboo                    Bambu</span></span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co">#&gt; 7              Cushion                    Coxim</span></span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co">#&gt; 8             Dendroid                Dendroide</span></span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="co">#&gt; 9              Unknown             Desconhecida</span></span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="co">#&gt; 10          Dracaenoid               Dracenoide</span></span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="co">#&gt; 13                Herb                     Erva</span></span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="co">#&gt; 14          Flabellate                Flabelado</span></span>
-<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="co">#&gt; 15             Foliose                  Folhosa</span></span>
-<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="co">#&gt; 16 Liana/scandent/vine Liana/voluvel/trepadeira</span></span>
-<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="co">#&gt; 19           Palm_tree                 Palmeira</span></span>
-<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a><span class="co">#&gt; 21             Pendent                 Pendente</span></span>
-<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a><span class="co">#&gt; 23            Subshrub               Subarbusto</span></span>
-<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a><span class="co">#&gt; 24           Succulent                Suculenta</span></span>
-<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a><span class="co">#&gt; 25            Thallose                   Talosa</span></span>
-<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a><span class="co">#&gt; 26                 Mat                   Tapete</span></span>
-<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a><span class="co">#&gt; 27                Weft                    Trama</span></span>
-<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a><span class="co">#&gt; 28                Tuft                     Tufo</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>               <span class="at">kingdom =</span> <span class="st">&quot;Plantae&quot;</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt;               lifeForm</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; 1      Aquatic-Benthos</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; 2      Aquatic-Neuston</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; 3     Aquatic-Plankton</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt; 4                Shrub</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt; 5                 Tree</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">#&gt; 6               Bamboo</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co">#&gt; 7              Cushion</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co">#&gt; 8             Dendroid</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="co">#&gt; 9              Unknown</span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="co">#&gt; 10          Dracaenoid</span></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="co">#&gt; 13                Herb</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="co">#&gt; 14          Flabellate</span></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="co">#&gt; 15             Foliose</span></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="co">#&gt; 16 Liana/scandent/vine</span></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="co">#&gt; 19           Palm_tree</span></span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a><span class="co">#&gt; 21             Pendent</span></span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a><span class="co">#&gt; 23            Subshrub</span></span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a><span class="co">#&gt; 24           Succulent</span></span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a><span class="co">#&gt; 25            Thallose</span></span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a><span class="co">#&gt; 26                 Mat</span></span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a><span class="co">#&gt; 27                Weft</span></span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a><span class="co">#&gt; 28                Tuft</span></span>
 <span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a></span>
 <span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a><span class="co">#Get available options to filter by  Biome</span></span>
 <span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a><span class="fu">get_attributes</span>(<span class="at">data =</span> bf,</span>
 <span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a>               <span class="at">attribute =</span> <span class="st">&quot;Biome&quot;</span>,</span>
-<span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a>               <span class="at">Kingdom =</span> <span class="st">&quot;Plantae&quot;</span>)</span>
-<span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a><span class="co">#&gt;                 Biome                Bioma</span></span>
-<span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a><span class="co">#&gt; 1              Amazon             Amazonia</span></span>
-<span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a><span class="co">#&gt; 2     Atlantic_Forest       Mata_Atlantica</span></span>
-<span id="cb2-36"><a href="#cb2-36" tabindex="-1"></a><span class="co">#&gt; 3            Caatinga             Caatinga</span></span>
-<span id="cb2-37"><a href="#cb2-37" tabindex="-1"></a><span class="co">#&gt; 4             Cerrado              Cerrado</span></span>
-<span id="cb2-38"><a href="#cb2-38" tabindex="-1"></a><span class="co">#&gt; 5               Pampa                Pampa</span></span>
-<span id="cb2-39"><a href="#cb2-39" tabindex="-1"></a><span class="co">#&gt; 6            Pantanal             Pantanal</span></span>
-<span id="cb2-40"><a href="#cb2-40" tabindex="-1"></a><span class="co">#&gt; 7 Not_found_in_Brazil Nao_ocorre_no_Brasil</span></span>
+<span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a>               <span class="at">kingdom =</span> <span class="st">&quot;Plantae&quot;</span>)</span>
+<span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a><span class="co">#&gt;                 biome</span></span>
+<span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a><span class="co">#&gt; 1              Amazon</span></span>
+<span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a><span class="co">#&gt; 2     Atlantic_Forest</span></span>
+<span id="cb2-36"><a href="#cb2-36" tabindex="-1"></a><span class="co">#&gt; 3            Caatinga</span></span>
+<span id="cb2-37"><a href="#cb2-37" tabindex="-1"></a><span class="co">#&gt; 4             Cerrado</span></span>
+<span id="cb2-38"><a href="#cb2-38" tabindex="-1"></a><span class="co">#&gt; 5               Pampa</span></span>
+<span id="cb2-39"><a href="#cb2-39" tabindex="-1"></a><span class="co">#&gt; 6            Pantanal</span></span>
+<span id="cb2-40"><a href="#cb2-40" tabindex="-1"></a><span class="co">#&gt; 7 Not_found_in_brazil</span></span>
 <span id="cb2-41"><a href="#cb2-41" tabindex="-1"></a></span>
-<span id="cb2-42"><a href="#cb2-42" tabindex="-1"></a><span class="co">#Get available options to filter by VegetationType</span></span>
+<span id="cb2-42"><a href="#cb2-42" tabindex="-1"></a><span class="co">#Get available options to filter by vegetation</span></span>
 <span id="cb2-43"><a href="#cb2-43" tabindex="-1"></a><span class="fu">get_attributes</span>(<span class="at">data =</span> bf,</span>
 <span id="cb2-44"><a href="#cb2-44" tabindex="-1"></a>               <span class="at">attribute =</span> <span class="st">&quot;vegetationType&quot;</span>,</span>
-<span id="cb2-45"><a href="#cb2-45" tabindex="-1"></a>               <span class="at">Kingdom =</span> <span class="st">&quot;Plantae&quot;</span>)</span>
-<span id="cb2-46"><a href="#cb2-46" tabindex="-1"></a><span class="co">#&gt;                     VegetationType                           TipoVegetacao</span></span>
-<span id="cb2-47"><a href="#cb2-47" tabindex="-1"></a><span class="co">#&gt; 1                   Anthropic_Area                          Area Antropica</span></span>
-<span id="cb2-48"><a href="#cb2-48" tabindex="-1"></a><span class="co">#&gt; 2                         Caatinga                Caatinga (stricto sensu)</span></span>
-<span id="cb2-49"><a href="#cb2-49" tabindex="-1"></a><span class="co">#&gt; 3            Amazonian_Campinarana                             Campinarana</span></span>
-<span id="cb2-50"><a href="#cb2-50" tabindex="-1"></a><span class="co">#&gt; 4          High_Altitude_Grassland                       Campo de Altitude</span></span>
-<span id="cb2-51"><a href="#cb2-51" tabindex="-1"></a><span class="co">#&gt; 5                    Flooded_Field                         Campo de Varzea</span></span>
-<span id="cb2-52"><a href="#cb2-52" tabindex="-1"></a><span class="co">#&gt; 6                        Grassland                             Campo Limpo</span></span>
-<span id="cb2-53"><a href="#cb2-53" tabindex="-1"></a><span class="co">#&gt; 7             Highland_Rocky_Field                          Campo rupestre</span></span>
-<span id="cb2-54"><a href="#cb2-54" tabindex="-1"></a><span class="co">#&gt; 8                         Carrasco                                Carrasco</span></span>
-<span id="cb2-55"><a href="#cb2-55" tabindex="-1"></a><span class="co">#&gt; 9                          Cerrado                    Cerrado (lato sensu)</span></span>
-<span id="cb2-56"><a href="#cb2-56" tabindex="-1"></a><span class="co">#&gt; 10                  Gallery_Forest              Floresta Ciliar ou Galeria</span></span>
-<span id="cb2-57"><a href="#cb2-57" tabindex="-1"></a><span class="co">#&gt; 11          Inundated_Forest_Igapo                       Floresta de Igapo</span></span>
-<span id="cb2-58"><a href="#cb2-58" tabindex="-1"></a><span class="co">#&gt; 12              Terra_Firme_Forest                 Floresta de Terra Firme</span></span>
-<span id="cb2-59"><a href="#cb2-59" tabindex="-1"></a><span class="co">#&gt; 13                Inundated_Forest                      Floresta de Varzea</span></span>
-<span id="cb2-60"><a href="#cb2-60" tabindex="-1"></a><span class="co">#&gt; 14    Seasonallly_Deciduous_Forest            Floresta Estacional Decidual</span></span>
-<span id="cb2-61"><a href="#cb2-61" tabindex="-1"></a><span class="co">#&gt; 15       Seasonal_Evergreen_Forest         Floresta Estacional Perenifolia</span></span>
-<span id="cb2-62"><a href="#cb2-62" tabindex="-1"></a><span class="co">#&gt; 16 Seasonally_Semideciduous_Forest        Floresta Estacional Semidecidual</span></span>
-<span id="cb2-63"><a href="#cb2-63" tabindex="-1"></a><span class="co">#&gt; 17                      Rainforest Floresta Ombrofila (= Floresta Pluvial)</span></span>
-<span id="cb2-64"><a href="#cb2-64" tabindex="-1"></a><span class="co">#&gt; 18      Mixed_Ombrophyllous_Forest                Floresta Ombrofila Mista</span></span>
-<span id="cb2-65"><a href="#cb2-65" tabindex="-1"></a><span class="co">#&gt; 19                        Mangrove                               Manguezal</span></span>
-<span id="cb2-66"><a href="#cb2-66" tabindex="-1"></a><span class="co">#&gt; 20                      Palm_Grove                               Palmeiral</span></span>
-<span id="cb2-67"><a href="#cb2-67" tabindex="-1"></a><span class="co">#&gt; 21                        Restinga                                Restinga</span></span>
-<span id="cb2-68"><a href="#cb2-68" tabindex="-1"></a><span class="co">#&gt; 22               Amazonian_Savanna                        Savana Amazonica</span></span>
-<span id="cb2-69"><a href="#cb2-69" tabindex="-1"></a><span class="co">#&gt; 23              Aquatic_Vegetation                      Vegetacao Aquatica</span></span>
-<span id="cb2-70"><a href="#cb2-70" tabindex="-1"></a><span class="co">#&gt; 24         Rock_outcrop_Vegetation   Vegetacao Sobre Afloramentos Rochosos</span></span>
-<span id="cb2-71"><a href="#cb2-71" tabindex="-1"></a><span class="co">#&gt; 25             Not_found_in_Brazil                    Nao ocorre no Brasil</span></span></code></pre></div>
+<span id="cb2-45"><a href="#cb2-45" tabindex="-1"></a>               <span class="at">kingdom =</span> <span class="st">&quot;Plantae&quot;</span>)</span>
+<span id="cb2-46"><a href="#cb2-46" tabindex="-1"></a><span class="co">#&gt;                         vegetation</span></span>
+<span id="cb2-47"><a href="#cb2-47" tabindex="-1"></a><span class="co">#&gt; 1                   Anthropic_Area</span></span>
+<span id="cb2-48"><a href="#cb2-48" tabindex="-1"></a><span class="co">#&gt; 2                         Caatinga</span></span>
+<span id="cb2-49"><a href="#cb2-49" tabindex="-1"></a><span class="co">#&gt; 3            Amazonian_Campinarana</span></span>
+<span id="cb2-50"><a href="#cb2-50" tabindex="-1"></a><span class="co">#&gt; 4          High_Altitude_Grassland</span></span>
+<span id="cb2-51"><a href="#cb2-51" tabindex="-1"></a><span class="co">#&gt; 5                    Flooded_Field</span></span>
+<span id="cb2-52"><a href="#cb2-52" tabindex="-1"></a><span class="co">#&gt; 6                        Grassland</span></span>
+<span id="cb2-53"><a href="#cb2-53" tabindex="-1"></a><span class="co">#&gt; 7             Highland_Rocky_Field</span></span>
+<span id="cb2-54"><a href="#cb2-54" tabindex="-1"></a><span class="co">#&gt; 8                         Carrasco</span></span>
+<span id="cb2-55"><a href="#cb2-55" tabindex="-1"></a><span class="co">#&gt; 9                          Cerrado</span></span>
+<span id="cb2-56"><a href="#cb2-56" tabindex="-1"></a><span class="co">#&gt; 10                  Gallery_Forest</span></span>
+<span id="cb2-57"><a href="#cb2-57" tabindex="-1"></a><span class="co">#&gt; 11          Inundated_Forest_Igapo</span></span>
+<span id="cb2-58"><a href="#cb2-58" tabindex="-1"></a><span class="co">#&gt; 12              Terra_Firme_Forest</span></span>
+<span id="cb2-59"><a href="#cb2-59" tabindex="-1"></a><span class="co">#&gt; 13                Inundated_Forest</span></span>
+<span id="cb2-60"><a href="#cb2-60" tabindex="-1"></a><span class="co">#&gt; 14    Seasonallly_Deciduous_Forest</span></span>
+<span id="cb2-61"><a href="#cb2-61" tabindex="-1"></a><span class="co">#&gt; 15       Seasonal_Evergreen_Forest</span></span>
+<span id="cb2-62"><a href="#cb2-62" tabindex="-1"></a><span class="co">#&gt; 16 Seasonally_Semideciduous_Forest</span></span>
+<span id="cb2-63"><a href="#cb2-63" tabindex="-1"></a><span class="co">#&gt; 17                      Rainforest</span></span>
+<span id="cb2-64"><a href="#cb2-64" tabindex="-1"></a><span class="co">#&gt; 18      Mixed_Ombrophyllous_Forest</span></span>
+<span id="cb2-65"><a href="#cb2-65" tabindex="-1"></a><span class="co">#&gt; 19                        Mangrove</span></span>
+<span id="cb2-66"><a href="#cb2-66" tabindex="-1"></a><span class="co">#&gt; 20                      Palm_Grove</span></span>
+<span id="cb2-67"><a href="#cb2-67" tabindex="-1"></a><span class="co">#&gt; 21                        Restinga</span></span>
+<span id="cb2-68"><a href="#cb2-68" tabindex="-1"></a><span class="co">#&gt; 22               Amazonian_Savanna</span></span>
+<span id="cb2-69"><a href="#cb2-69" tabindex="-1"></a><span class="co">#&gt; 23              Aquatic_vegetation</span></span>
+<span id="cb2-70"><a href="#cb2-70" tabindex="-1"></a><span class="co">#&gt; 24         Rock_outcrop_vegetation</span></span>
+<span id="cb2-71"><a href="#cb2-71" tabindex="-1"></a><span class="co">#&gt; 25             Not_found_in_Brazil</span></span></code></pre></div>
 <p>As an illustration, let’s consider the scenario where we aim to
 retrieve a list of all native and endemic trees with confirmed
 occurrences in the Atlantic Forest:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>af_spp <span class="ot">&lt;-</span> <span class="fu">select_species</span>(<span class="at">data =</span> bf,</span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>                      <span class="at">include_subspecies =</span> <span class="cn">FALSE</span>, <span class="at">include_variety =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>                      <span class="at">Kingdom =</span> <span class="st">&quot;Plantae&quot;</span>, <span class="at">Group =</span> <span class="st">&quot;All&quot;</span>, <span class="at">Subgroup =</span> <span class="st">&quot;All&quot;</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>                      <span class="at">Family =</span> <span class="st">&quot;All&quot;</span>, <span class="at">Genus =</span> <span class="st">&quot;All&quot;</span>,</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>                      <span class="at">LifeForm =</span> <span class="st">&quot;Tree&quot;</span>, <span class="co">#Specify tree species</span></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>                      <span class="at">filter_LifeForm =</span> <span class="st">&quot;in&quot;</span>,</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>                      <span class="at">Habitat =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_Habitat =</span> <span class="st">&quot;in&quot;</span>,</span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>                      <span class="at">Biome =</span> <span class="st">&quot;Atlantic_Forest&quot;</span>, <span class="co">#Occuring in the At. Forest</span></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>                      <span class="at">filter_Biome =</span> <span class="st">&quot;in&quot;</span>, <span class="co">#In Atlantic Forest</span></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>                      <span class="at">State =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_State =</span> <span class="st">&quot;in&quot;</span>,</span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>                      <span class="at">VegetationType =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_Vegetation =</span> <span class="st">&quot;in&quot;</span>,</span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>                      <span class="at">Endemism =</span> <span class="st">&quot;Endemic&quot;</span>, <span class="co">#Only endemics to Brazil</span></span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>                      <span class="at">Origin =</span> <span class="st">&quot;Native&quot;</span>, <span class="co">#Only natives</span></span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>                      <span class="at">TaxonomicStatus =</span> <span class="st">&quot;Accepted&quot;</span>,</span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>                      <span class="at">NomenclaturalStatus =</span> <span class="st">&quot;All&quot;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>                      <span class="at">kingdom =</span> <span class="st">&quot;Plantae&quot;</span>, <span class="at">group =</span> <span class="st">&quot;All&quot;</span>, <span class="at">subgroup =</span> <span class="st">&quot;All&quot;</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>                      <span class="at">family =</span> <span class="st">&quot;All&quot;</span>, <span class="at">genus =</span> <span class="st">&quot;All&quot;</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>                      <span class="at">lifeForm =</span> <span class="st">&quot;Tree&quot;</span>, <span class="co">#Specify tree species</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>                      <span class="at">filter_lifeForm =</span> <span class="st">&quot;in&quot;</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>                      <span class="at">habitat =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_habitat =</span> <span class="st">&quot;in&quot;</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>                      <span class="at">biome =</span> <span class="st">&quot;Atlantic_Forest&quot;</span>, <span class="co">#Occuring in the At. Forest</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>                      <span class="at">filter_biome =</span> <span class="st">&quot;in&quot;</span>, <span class="co">#In Atlantic Forest</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>                      <span class="at">state =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_state =</span> <span class="st">&quot;in&quot;</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>                      <span class="at">vegetation =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_vegetation =</span> <span class="st">&quot;in&quot;</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>                      <span class="at">endemism =</span> <span class="st">&quot;Endemic&quot;</span>, <span class="co">#Only endemics to Brazil</span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>                      <span class="at">origin =</span> <span class="st">&quot;Native&quot;</span>, <span class="co">#Only natives</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>                      <span class="at">taxonomicStatus =</span> <span class="st">&quot;Accepted&quot;</span>,</span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>                      <span class="at">nomenclaturalStatus =</span> <span class="st">&quot;All&quot;</span>)</span>
 <span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="fu">nrow</span>(af_spp)</span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="co">#&gt; [1] 2362</span></span></code></pre></div>
-<p>The filter returned 2362 species that meet the specified criteria.
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="co">#&gt; [1] 2372</span></span></code></pre></div>
+<p>The filter returned 2372 species that meet the specified criteria.
 It’s important to note that these selections include species with
 confirmed occurrences in the Atlantic Forest, and some of them may also
 have confirmed occurrences in other biomes.</p>
@@ -493,28 +492,28 @@ have confirmed occurrences in other biomes.</p>
 <span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; [6] &quot;Atlantic_Forest;Caatinga;Cerrado&quot;       </span></span>
 <span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; [7] &quot;Amazon;Atlantic_Forest&quot;</span></span></code></pre></div>
 <p>If you wish to exclusively select species with confirmed occurrences
-in the Atlantic Forest, modify the <em>filter_Biome</em> parameter to
+in the Atlantic Forest, modify the <em>filter_biome</em> parameter to
 “only”:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>only_af_spp <span class="ot">&lt;-</span> <span class="fu">select_species</span>(<span class="at">data =</span> bf,</span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>                      <span class="at">include_subspecies =</span> <span class="cn">FALSE</span>, <span class="at">include_variety =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>                      <span class="at">Kingdom =</span> <span class="st">&quot;Plantae&quot;</span>, <span class="at">Group =</span> <span class="st">&quot;All&quot;</span>, <span class="at">Subgroup =</span> <span class="st">&quot;All&quot;</span>,</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>                      <span class="at">Family =</span> <span class="st">&quot;All&quot;</span>, <span class="at">Genus =</span> <span class="st">&quot;All&quot;</span>,</span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>                      <span class="at">LifeForm =</span> <span class="st">&quot;Tree&quot;</span>, <span class="co">#Specify tree species</span></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>                      <span class="at">filter_LifeForm =</span> <span class="st">&quot;in&quot;</span>,</span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>                      <span class="at">Habitat =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_Habitat =</span> <span class="st">&quot;in&quot;</span>,</span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>                      <span class="at">Biome =</span> <span class="st">&quot;Atlantic_Forest&quot;</span>, <span class="co">#Occuring in the At. Forest</span></span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>                      <span class="at">filter_Biome =</span> <span class="st">&quot;only&quot;</span>, <span class="co">#ONLY in Atlantic Forest</span></span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>                      <span class="at">State =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_State =</span> <span class="st">&quot;in&quot;</span>,</span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>                      <span class="at">VegetationType =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_Vegetation =</span> <span class="st">&quot;in&quot;</span>,</span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>                      <span class="at">Endemism =</span> <span class="st">&quot;Endemic&quot;</span>, <span class="co">#Only endemics to Brazil</span></span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>                      <span class="at">Origin =</span> <span class="st">&quot;Native&quot;</span>, <span class="co">#Only natives</span></span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>                      <span class="at">TaxonomicStatus =</span> <span class="st">&quot;Accepted&quot;</span>,</span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>                      <span class="at">NomenclaturalStatus =</span> <span class="st">&quot;All&quot;</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>                      <span class="at">kingdom =</span> <span class="st">&quot;Plantae&quot;</span>, <span class="at">group =</span> <span class="st">&quot;All&quot;</span>, <span class="at">subgroup =</span> <span class="st">&quot;All&quot;</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>                      <span class="at">family =</span> <span class="st">&quot;All&quot;</span>, <span class="at">genus =</span> <span class="st">&quot;All&quot;</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>                      <span class="at">lifeForm =</span> <span class="st">&quot;Tree&quot;</span>, <span class="co">#Specify tree species</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>                      <span class="at">filter_lifeForm =</span> <span class="st">&quot;in&quot;</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>                      <span class="at">habitat =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_habitat =</span> <span class="st">&quot;in&quot;</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>                      <span class="at">biome =</span> <span class="st">&quot;Atlantic_Forest&quot;</span>, <span class="co">#Occuring in the At. Forest</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>                      <span class="at">filter_biome =</span> <span class="st">&quot;only&quot;</span>, <span class="co">#ONLY in Atlantic Forest</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>                      <span class="at">state =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_state =</span> <span class="st">&quot;in&quot;</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>                      <span class="at">vegetation =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_vegetation =</span> <span class="st">&quot;in&quot;</span>,</span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>                      <span class="at">endemism =</span> <span class="st">&quot;Endemic&quot;</span>, <span class="co">#Only endemics to Brazil</span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>                      <span class="at">origin =</span> <span class="st">&quot;Native&quot;</span>, <span class="co">#Only natives</span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>                      <span class="at">taxonomicStatus =</span> <span class="st">&quot;Accepted&quot;</span>,</span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>                      <span class="at">nomenclaturalStatus =</span> <span class="st">&quot;All&quot;</span>)</span>
 <span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="fu">nrow</span>(only_af_spp)</span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co">#&gt; [1] 1849</span></span>
-<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a><span class="fu">unique</span>(only_af_spp<span class="sc">$</span>Biome)</span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co">#&gt; [1] 1858</span></span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a><span class="fu">unique</span>(only_af_spp<span class="sc">$</span>biome)</span>
 <span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Atlantic_Forest&quot;</span></span></code></pre></div>
-<p>Now, the filter has resulted in 1849 species, all exclusively
+<p>Now, the filter has resulted in 1858 species, all exclusively
 confined to the Atlantic Forest biome.</p>
 <p>Furthermore, the package offers the flexibility to apply various
 filtering options (please consult <code>?select_species</code> for
@@ -525,56 +524,56 @@ occurrences in the states of Paraná (PR), Santa Catarina (SC), and Rio
 Grande do Sul (RS):</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>south_af_spp <span class="ot">&lt;-</span> <span class="fu">select_species</span>(<span class="at">data =</span> bf,</span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>                      <span class="at">include_subspecies =</span> <span class="cn">FALSE</span>, <span class="at">include_variety =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>                      <span class="at">Kingdom =</span> <span class="st">&quot;Plantae&quot;</span>, <span class="at">Group =</span> <span class="st">&quot;All&quot;</span>, <span class="at">Subgroup =</span> <span class="st">&quot;All&quot;</span>,</span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>                      <span class="at">Family =</span> <span class="st">&quot;All&quot;</span>, <span class="at">Genus =</span> <span class="st">&quot;All&quot;</span>,</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>                      <span class="at">LifeForm =</span> <span class="st">&quot;Tree&quot;</span>, <span class="co">#Specify tree species</span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>                      <span class="at">filter_LifeForm =</span> <span class="st">&quot;in&quot;</span>,</span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>                      <span class="at">Habitat =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_Habitat =</span> <span class="st">&quot;in&quot;</span>,</span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>                      <span class="at">Biome =</span> <span class="st">&quot;Atlantic_Forest&quot;</span>, <span class="co">#Occuring in the At. Forest</span></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>                      <span class="at">filter_Biome =</span> <span class="st">&quot;only&quot;</span>, <span class="co">#Only in Atlantic Forest</span></span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>                      <span class="at">State =</span> <span class="fu">c</span>(<span class="st">&quot;PR&quot;</span>, <span class="st">&quot;SC&quot;</span>, <span class="st">&quot;RS&quot;</span>), <span class="co">#States - Use the acronynms</span></span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>                      <span class="at">filter_State =</span> <span class="st">&quot;in&quot;</span>, <span class="co">#IN at least one of these states</span></span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>                      <span class="at">VegetationType =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_Vegetation =</span> <span class="st">&quot;in&quot;</span>,</span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>                      <span class="at">Endemism =</span> <span class="st">&quot;Endemic&quot;</span>, <span class="co">#Only endemics to Brazil</span></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>                      <span class="at">Origin =</span> <span class="st">&quot;Native&quot;</span>, <span class="co">#Only natives</span></span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>                      <span class="at">TaxonomicStatus =</span> <span class="st">&quot;Accepted&quot;</span>,</span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>                      <span class="at">NomenclaturalStatus =</span> <span class="st">&quot;All&quot;</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>                      <span class="at">kingdom =</span> <span class="st">&quot;Plantae&quot;</span>, <span class="at">group =</span> <span class="st">&quot;All&quot;</span>, <span class="at">subgroup =</span> <span class="st">&quot;All&quot;</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>                      <span class="at">family =</span> <span class="st">&quot;All&quot;</span>, <span class="at">genus =</span> <span class="st">&quot;All&quot;</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>                      <span class="at">lifeForm =</span> <span class="st">&quot;Tree&quot;</span>, <span class="co">#Specify tree species</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>                      <span class="at">filter_lifeForm =</span> <span class="st">&quot;in&quot;</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>                      <span class="at">habitat =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_habitat =</span> <span class="st">&quot;in&quot;</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>                      <span class="at">biome =</span> <span class="st">&quot;Atlantic_Forest&quot;</span>, <span class="co">#Occuring in the At. Forest</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>                      <span class="at">filter_biome =</span> <span class="st">&quot;only&quot;</span>, <span class="co">#Only in Atlantic Forest</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>                      <span class="at">state =</span> <span class="fu">c</span>(<span class="st">&quot;PR&quot;</span>, <span class="st">&quot;SC&quot;</span>, <span class="st">&quot;RS&quot;</span>), <span class="co">#states - Use the acronynms</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>                      <span class="at">filter_state =</span> <span class="st">&quot;in&quot;</span>, <span class="co">#IN at least one of these states</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>                      <span class="at">vegetation =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_vegetation =</span> <span class="st">&quot;in&quot;</span>,</span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>                      <span class="at">endemism =</span> <span class="st">&quot;Endemic&quot;</span>, <span class="co">#Only endemics to Brazil</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>                      <span class="at">origin =</span> <span class="st">&quot;Native&quot;</span>, <span class="co">#Only natives</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>                      <span class="at">taxonomicStatus =</span> <span class="st">&quot;Accepted&quot;</span>,</span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>                      <span class="at">nomenclaturalStatus =</span> <span class="st">&quot;All&quot;</span>)</span>
 <span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="fu">nrow</span>(south_af_spp)</span>
-<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="co">#&gt; [1] 371</span></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="co">#&gt; [1] 372</span></span>
 <span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a></span>
 <span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="co">#First 10 unique values of states in the filtered dataset</span></span>
-<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="fu">unique</span>(south_af_spp<span class="sc">$</span>States)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="fu">unique</span>(south_af_spp<span class="sc">$</span>states)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
 <span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="co">#&gt;  [1] &quot;BA;ES;PR;RJ;SC;SP&quot;               &quot;AL;BA;CE;ES;MA;MG;PB;PE;PR;RJ;SE;SP&quot;</span></span>
 <span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a><span class="co">#&gt;  [3] &quot;PR;RS;SC&quot;                        &quot;BA;CE;ES;MA;MG;PE;PR;RJ;SP&quot;         </span></span>
 <span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a><span class="co">#&gt;  [5] &quot;MG;PR;RJ;SC;SP&quot;                  &quot;MG;PR;RJ;RS;SC;SP&quot;                  </span></span>
 <span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a><span class="co">#&gt;  [7] &quot;BA;ES;MG;PR;RJ;SC;SP&quot;            &quot;MG;PR;RS;SC;SP&quot;                     </span></span>
 <span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a><span class="co">#&gt;  [9] &quot;PR;RJ;RS;SC;SP&quot;                  &quot;ES;MG;PR;RJ;RS;SC;SP&quot;</span></span></code></pre></div>
-<p>By utilizing <em>filter_State = “in”</em>, our selection encompassed
+<p>By utilizing <em>filter_state = “in”</em>, our selection encompassed
 species occurring in all three states, as well as those appearing in
 only two or even one of them. To impose a more rigorous criterion,
 selecting solely those species with confirmed occurrences in all three
-states, we can use <em>filter_State = “and”</em>:</p>
+states, we can use <em>filter_state = “and”</em>:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>south_af_spp2 <span class="ot">&lt;-</span> <span class="fu">select_species</span>(<span class="at">data =</span> bf,</span>
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>                      <span class="at">include_subspecies =</span> <span class="cn">FALSE</span>, <span class="at">include_variety =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>                      <span class="at">Kingdom =</span> <span class="st">&quot;Plantae&quot;</span>, <span class="at">Group =</span> <span class="st">&quot;All&quot;</span>, <span class="at">Subgroup =</span> <span class="st">&quot;All&quot;</span>,</span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>                      <span class="at">Family =</span> <span class="st">&quot;All&quot;</span>, <span class="at">Genus =</span> <span class="st">&quot;All&quot;</span>,</span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>                      <span class="at">LifeForm =</span> <span class="st">&quot;Tree&quot;</span>, <span class="co">#Specify tree species</span></span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>                      <span class="at">filter_LifeForm =</span> <span class="st">&quot;in&quot;</span>,</span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>                      <span class="at">Habitat =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_Habitat =</span> <span class="st">&quot;in&quot;</span>,</span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>                      <span class="at">Biome =</span> <span class="st">&quot;Atlantic_Forest&quot;</span>, <span class="co">#Occurring in the At. Forest</span></span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>                      <span class="at">filter_Biome =</span> <span class="st">&quot;only&quot;</span>, <span class="co">#Only in Atlantic Forest</span></span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>                      <span class="at">State =</span> <span class="fu">c</span>(<span class="st">&quot;PR&quot;</span>, <span class="st">&quot;SC&quot;</span>, <span class="st">&quot;RS&quot;</span>), <span class="co">#States - Use the acronynms</span></span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>                      <span class="at">filter_State =</span> <span class="st">&quot;and&quot;</span>, <span class="co">#PR and SC and RS</span></span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>                      <span class="at">VegetationType =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_Vegetation =</span> <span class="st">&quot;in&quot;</span>,</span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>                      <span class="at">Endemism =</span> <span class="st">&quot;Endemic&quot;</span>, <span class="co">#Only endemics to Brazil</span></span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>                      <span class="at">Origin =</span> <span class="st">&quot;Native&quot;</span>, <span class="co">#Only natives</span></span>
-<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>                      <span class="at">TaxonomicStatus =</span> <span class="st">&quot;Accepted&quot;</span>,</span>
-<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>                      <span class="at">NomenclaturalStatus =</span> <span class="st">&quot;All&quot;</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>                      <span class="at">kingdom =</span> <span class="st">&quot;Plantae&quot;</span>, <span class="at">group =</span> <span class="st">&quot;All&quot;</span>, <span class="at">subgroup =</span> <span class="st">&quot;All&quot;</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>                      <span class="at">family =</span> <span class="st">&quot;All&quot;</span>, <span class="at">genus =</span> <span class="st">&quot;All&quot;</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>                      <span class="at">lifeForm =</span> <span class="st">&quot;Tree&quot;</span>, <span class="co">#Specify tree species</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>                      <span class="at">filter_lifeForm =</span> <span class="st">&quot;in&quot;</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>                      <span class="at">habitat =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_habitat =</span> <span class="st">&quot;in&quot;</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>                      <span class="at">biome =</span> <span class="st">&quot;Atlantic_Forest&quot;</span>, <span class="co">#Occurring in the At. Forest</span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>                      <span class="at">filter_biome =</span> <span class="st">&quot;only&quot;</span>, <span class="co">#Only in Atlantic Forest</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>                      <span class="at">state =</span> <span class="fu">c</span>(<span class="st">&quot;PR&quot;</span>, <span class="st">&quot;SC&quot;</span>, <span class="st">&quot;RS&quot;</span>), <span class="co">#states - Use the acronynms</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>                      <span class="at">filter_state =</span> <span class="st">&quot;and&quot;</span>, <span class="co">#PR and SC and RS</span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>                      <span class="at">vegetation =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_vegetation =</span> <span class="st">&quot;in&quot;</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>                      <span class="at">endemism =</span> <span class="st">&quot;Endemic&quot;</span>, <span class="co">#Only endemics to Brazil</span></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>                      <span class="at">origin =</span> <span class="st">&quot;Native&quot;</span>, <span class="co">#Only natives</span></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>                      <span class="at">taxonomicStatus =</span> <span class="st">&quot;Accepted&quot;</span>,</span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>                      <span class="at">nomenclaturalStatus =</span> <span class="st">&quot;All&quot;</span>)</span>
 <span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a><span class="fu">nrow</span>(south_af_spp2)</span>
 <span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="co">#&gt; [1] 29</span></span>
 <span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a></span>
 <span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="co">#All unique states in the filtered dataset</span></span>
-<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a><span class="fu">unique</span>(south_af_spp2<span class="sc">$</span>States)</span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a><span class="fu">unique</span>(south_af_spp2<span class="sc">$</span>states)</span>
 <span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a><span class="co">#&gt; [1] &quot;PR;RS;SC&quot;       &quot;MG;PR;RS;SC;SP&quot; &quot;PR;RS;SC;SP&quot;    &quot;ES;PR;RS;SC;SP&quot;</span></span>
 <span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a><span class="co">#&gt; [5] &quot;MG;PR;RS;SC&quot;</span></span></code></pre></div>
 <p>Now, our selection consists solely of species with confirmed
@@ -582,28 +581,28 @@ occurrences in all of the specified states. However, by utilizing the
 “and” argument, we permit the filter to include species with occurrences
 in additional states. To confine the filter exclusively to species with
 confirmed occurrences in all three states, without any occurrences
-elsewhere, we can use <em>filter_State = “only”</em>:</p>
+elsewhere, we can use <em>filter_state = “only”</em>:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>south_af_spp3 <span class="ot">&lt;-</span> <span class="fu">select_species</span>(<span class="at">data =</span> bf,</span>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>                      <span class="at">include_subspecies =</span> <span class="cn">FALSE</span>, <span class="at">include_variety =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>                      <span class="at">Kingdom =</span> <span class="st">&quot;Plantae&quot;</span>, <span class="at">Group =</span> <span class="st">&quot;All&quot;</span>, <span class="at">Subgroup =</span> <span class="st">&quot;All&quot;</span>,</span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>                      <span class="at">Family =</span> <span class="st">&quot;All&quot;</span>, <span class="at">Genus =</span> <span class="st">&quot;All&quot;</span>,</span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>                      <span class="at">LifeForm =</span> <span class="st">&quot;Tree&quot;</span>, <span class="co">#Specify tree species</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>                      <span class="at">filter_LifeForm =</span> <span class="st">&quot;in&quot;</span>,</span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>                      <span class="at">Habitat =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_Habitat =</span> <span class="st">&quot;in&quot;</span>,</span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>                      <span class="at">Biome =</span> <span class="st">&quot;Atlantic_Forest&quot;</span>, <span class="co">#Occuring in the At. Forest</span></span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>                      <span class="at">filter_Biome =</span> <span class="st">&quot;only&quot;</span>, <span class="co">#Only in Atlantic Forest</span></span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>                      <span class="at">State =</span> <span class="fu">c</span>(<span class="st">&quot;PR&quot;</span>, <span class="st">&quot;SC&quot;</span>, <span class="st">&quot;RS&quot;</span>), <span class="co">#States - Use the acronynms</span></span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>                      <span class="at">filter_State =</span> <span class="st">&quot;only&quot;</span>, <span class="co">#PR and SC and RS, no other else</span></span>
-<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>                      <span class="at">VegetationType =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_Vegetation =</span> <span class="st">&quot;in&quot;</span>,</span>
-<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>                      <span class="at">Endemism =</span> <span class="st">&quot;Endemic&quot;</span>, <span class="co">#Only endemics to Brazil</span></span>
-<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a>                      <span class="at">Origin =</span> <span class="st">&quot;Native&quot;</span>, <span class="co">#Only natives</span></span>
-<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>                      <span class="at">TaxonomicStatus =</span> <span class="st">&quot;Accepted&quot;</span>,</span>
-<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a>                      <span class="at">NomenclaturalStatus =</span> <span class="st">&quot;All&quot;</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>                      <span class="at">kingdom =</span> <span class="st">&quot;Plantae&quot;</span>, <span class="at">group =</span> <span class="st">&quot;All&quot;</span>, <span class="at">subgroup =</span> <span class="st">&quot;All&quot;</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>                      <span class="at">family =</span> <span class="st">&quot;All&quot;</span>, <span class="at">genus =</span> <span class="st">&quot;All&quot;</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>                      <span class="at">lifeForm =</span> <span class="st">&quot;Tree&quot;</span>, <span class="co">#Specify tree species</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>                      <span class="at">filter_lifeForm =</span> <span class="st">&quot;in&quot;</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>                      <span class="at">habitat =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_habitat =</span> <span class="st">&quot;in&quot;</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>                      <span class="at">biome =</span> <span class="st">&quot;Atlantic_Forest&quot;</span>, <span class="co">#Occuring in the At. Forest</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>                      <span class="at">filter_biome =</span> <span class="st">&quot;only&quot;</span>, <span class="co">#Only in Atlantic Forest</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>                      <span class="at">state =</span> <span class="fu">c</span>(<span class="st">&quot;PR&quot;</span>, <span class="st">&quot;SC&quot;</span>, <span class="st">&quot;RS&quot;</span>), <span class="co">#states - Use the acronynms</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>                      <span class="at">filter_state =</span> <span class="st">&quot;only&quot;</span>, <span class="co">#PR and SC and RS, no other else</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>                      <span class="at">vegetation =</span> <span class="st">&quot;All&quot;</span>, <span class="at">filter_vegetation =</span> <span class="st">&quot;in&quot;</span>,</span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>                      <span class="at">endemism =</span> <span class="st">&quot;Endemic&quot;</span>, <span class="co">#Only endemics to Brazil</span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a>                      <span class="at">origin =</span> <span class="st">&quot;Native&quot;</span>, <span class="co">#Only natives</span></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>                      <span class="at">taxonomicStatus =</span> <span class="st">&quot;Accepted&quot;</span>,</span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a>                      <span class="at">nomenclaturalStatus =</span> <span class="st">&quot;All&quot;</span>)</span>
 <span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="fu">nrow</span>(south_af_spp3)</span>
 <span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="co">#&gt; [1] 13</span></span>
 <span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a></span>
 <span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="co">#The unique state in the filtered dataset</span></span>
-<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="fu">unique</span>(south_af_spp3<span class="sc">$</span>States)</span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="fu">unique</span>(south_af_spp3<span class="sc">$</span>states)</span>
 <span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a><span class="co">#&gt; [1] &quot;PR;RS;SC&quot;</span></span></code></pre></div>
 <p>Now, the filter return only 13 species, all of them occurring in PR,
 SC and RS; with no recorded occurrences in any other states.</p>
@@ -621,11 +620,13 @@ angustifolia</em>, and does not support complete scientific names
 angustifolia (Bertol.) Kuntze</em> or <em>Araucaria angustifolia var.
 stricta Reitz</em>.</p>
 <p>If you have species with complete scientific names, you can extract
-the binomial names using the function <code>get_binomial()</code>:</p>
+the binomial names using the function <code>get_binomial()</code>. Don’t
+worry about excessive spaces between words; the function will remove any
+extra spaces from the names.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>complete_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Araucaria brasiliana var. ridolfiana (Pi.Savi) Gordon&quot;</span>,</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>                    <span class="st">&quot;Solanum restingae S.Knapp&quot;</span>,</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>                    <span class="st">&quot;Butia cattarinensis Noblick &amp; Lorenzi&quot;</span>,</span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>                    <span class="st">&quot;Homo sapiens&quot;</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>                    <span class="st">&quot; Solanum restingae  S.Knapp&quot;</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>                    <span class="st">&quot;Butia cattarinensis  Noblick &amp; Lorenzi   &quot;</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>                    <span class="st">&quot;Homo   sapiens&quot;</span>)</span>
 <span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co">#Human specie was used just as an example that will be used to illustrate the </span></span>
 <span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co">#next function</span></span>
 <span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>binomial_names <span class="ot">&lt;-</span> <span class="fu">get_binomial</span>(<span class="at">species_names =</span> complete_names)</span>
@@ -645,7 +646,7 @@ works, let’s utilize the previously created binomial_names dataset:</p>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>checked_names <span class="ot">&lt;-</span> <span class="fu">check_names</span>(<span class="at">data =</span> bf, </span>
 <span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>                             <span class="at">species =</span> binomial_names,</span>
 <span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>                             <span class="at">max_distance =</span> <span class="fl">0.1</span>,</span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>                             <span class="at">Kingdom =</span> <span class="st">&quot;Plantae&quot;</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>                             <span class="at">kingdom =</span> <span class="st">&quot;Plantae&quot;</span>)</span>
 <span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>checked_names</span>
 <span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co">#             input_name           Spelling       Suggested_name Distance taxonomicStatus nomenclaturalStatus           acceptedName        family</span></span>
 <span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="co"># 1 Araucaria brasiliana            Correct Araucaria brasiliana        0         Synonym                &lt;NA&gt; Araucaria angustifolia Araucariaceae</span></span>
@@ -668,13 +669,13 @@ available.</p>
 </div>
 <div id="subsetting-species" class="section level3">
 <h3>Subsetting species</h3>
-<p>To retrieve species information from the Brazilian Flora database,
-employ the <code>subset_species()</code> function. For optimal
+<p>To retrieve species information from the Flora e Funga do Brasil
+database, employ the <code>subset_species()</code> function. For optimal
 performance, we highly recommend utilizing the
 <code>get_binomial()</code> and <code>check_names()</code> functions
 beforehand. This ensures that you’re exclusively working with species
-present in the Brazilian Flora database. To see how the function works,
-let’s use the accepted names in <em>checked_names</em> created
+present in the Flora e Funga do Brasil database. To see how the function
+works, let’s use the accepted names in <em>checked_names</em> created
 previously:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co">#Get only accepted names</span></span>
 <span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>accepted_names <span class="ot">&lt;-</span> <span class="fu">unique</span>(checked_names<span class="sc">$</span>acceptedName)</span>
@@ -684,7 +685,7 @@ previously:</p>
 <span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>my_sp <span class="ot">&lt;-</span> <span class="fu">subset_species</span>(<span class="at">data =</span> bf, <span class="at">species =</span> accepted_names,</span>
 <span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>                      <span class="at">include_subspecies =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>                      <span class="at">include_variety =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>                      <span class="at">Kingdom =</span> <span class="st">&quot;Plantae&quot;</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>                      <span class="at">kingdom =</span> <span class="st">&quot;Plantae&quot;</span>)</span>
 <span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>my_sp</span>
 <span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a><span class="co">#&gt;                      species                          scientificName</span></span>
 <span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a><span class="co">#&gt; 11785      Solanum restingae               Solanum restingae S.Knapp</span></span>
@@ -703,7 +704,7 @@ previously:</p>
 <span id="cb11-25"><a href="#cb11-25" tabindex="-1"></a><span class="co">#&gt; 26790 High_Altitude_Grassland;Mixed_Ombrophyllous_Forest;</span></span>
 <span id="cb11-26"><a href="#cb11-26" tabindex="-1"></a><span class="co">#&gt;       Seasonally_Semideciduous_Forest</span></span>
 <span id="cb11-27"><a href="#cb11-27" tabindex="-1"></a><span class="co">#&gt; 99881 Restinga</span></span>
-<span id="cb11-28"><a href="#cb11-28" tabindex="-1"></a><span class="co">#&gt;       Origin    Endemism taxonomicStatus nomenclaturalStatus</span></span>
+<span id="cb11-28"><a href="#cb11-28" tabindex="-1"></a><span class="co">#&gt;       origin    endemism taxonomicStatus nomenclaturalStatus</span></span>
 <span id="cb11-29"><a href="#cb11-29" tabindex="-1"></a><span class="co">#&gt; 11785 Native     Endemic        Accepted             Correct</span></span>
 <span id="cb11-30"><a href="#cb11-30" tabindex="-1"></a><span class="co">#&gt; 26790 Native Non-endemic        Accepted             Correct</span></span>
 <span id="cb11-31"><a href="#cb11-31" tabindex="-1"></a><span class="co">#&gt; 99881 Native     Endemic        Accepted                &lt;NA&gt;</span></span>
@@ -720,7 +721,7 @@ previously:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>my_sp2 <span class="ot">&lt;-</span> <span class="fu">subset_species</span>(<span class="at">data =</span> bf, <span class="at">species =</span> accepted_names,</span>
 <span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>                      <span class="at">include_subspecies =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>                      <span class="at">include_variety =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>                      <span class="at">Kingdom =</span> <span class="st">&quot;Plantae&quot;</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>                      <span class="at">kingdom =</span> <span class="st">&quot;Plantae&quot;</span>)</span>
 <span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>my_sp2[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]</span>
 <span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="co">#&gt;                      species                            scientificName</span></span>
 <span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co">#&gt; 11785      Solanum restingae                 Solanum restingae S.Knapp</span></span>
@@ -747,7 +748,7 @@ previously:</p>
 <span id="cb12-28"><a href="#cb12-28" tabindex="-1"></a><span class="co">#&gt; 35204                                                                         </span></span>
 <span id="cb12-29"><a href="#cb12-29" tabindex="-1"></a><span class="co">#&gt; 35205                                                                          </span></span>
 <span id="cb12-30"><a href="#cb12-30" tabindex="-1"></a><span class="co">#&gt; 35206                                                                        </span></span>
-<span id="cb12-31"><a href="#cb12-31" tabindex="-1"></a><span class="co">#&gt;       Origin    Endemism taxonomicStatus nomenclaturalStatus</span></span>
+<span id="cb12-31"><a href="#cb12-31" tabindex="-1"></a><span class="co">#&gt;       origin    endemism taxonomicStatus nomenclaturalStatus</span></span>
 <span id="cb12-32"><a href="#cb12-32" tabindex="-1"></a><span class="co">#&gt; 11785 Native     Endemic        Accepted             Correct</span></span>
 <span id="cb12-33"><a href="#cb12-33" tabindex="-1"></a><span class="co">#&gt; 26790 Native Non-endemic        Accepted             Correct</span></span>
 <span id="cb12-34"><a href="#cb12-34" tabindex="-1"></a><span class="co">#&gt; 35204   &lt;NA&gt;        &lt;NA&gt;         Synonym                &lt;NA&gt;</span></span>
@@ -766,6 +767,35 @@ previously:</p>
 <span id="cb12-47"><a href="#cb12-47" tabindex="-1"></a><span class="co">#&gt; 35204   Variety</span></span>
 <span id="cb12-48"><a href="#cb12-48" tabindex="-1"></a><span class="co">#&gt; 35205   Variety</span></span>
 <span id="cb12-49"><a href="#cb12-49" tabindex="-1"></a><span class="co">#&gt; 35206   Variety</span></span></code></pre></div>
+</div>
+<div id="retrieving-synonyms" class="section level3">
+<h3>Retrieving synonyms</h3>
+<p>We can retrieve all synonyms of a species list. This can be
+particularly useful, for example, when searching for records of a
+species and all its synonyms (as listed in the Flora e Funga do Brasil)
+in online databases like GBIF. To accomplish this, utilize the function
+get_synonym. To understand how the function works, let’s search for the
+synonyms of two species:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>spp <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Araucaria angustifolia&quot;</span>, <span class="st">&quot;Adesmia paranensis&quot;</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>spp_syn <span class="ot">&lt;-</span> <span class="fu">get_synonym</span>(<span class="at">data =</span> bf, <span class="at">species =</span> spp)</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>spp_syn</span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="co">#&gt;                       synonym           acceptedName taxonomicStatus      nomenclaturalStatus</span></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="co">#&gt; 35323    Araucaria brasiliana Araucaria angustifolia         Synonym                     &lt;NA&gt;</span></span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="co">#&gt; 35325  Araucaria brasiliensis Araucaria angustifolia         Synonym                     &lt;NA&gt;</span></span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="co">#&gt; 35327        Araucaria dioica Araucaria angustifolia         Synonym                     &lt;NA&gt;</span></span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="co">#&gt; 35328       Araucaria elegans Araucaria angustifolia         Synonym                     &lt;NA&gt;</span></span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a><span class="co">#&gt; 35329    Araucaria ridolfiana Araucaria angustifolia         Synonym                     &lt;NA&gt;</span></span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="co">#&gt; 35330       Araucaria saviana Araucaria angustifolia         Synonym                     &lt;NA&gt;</span></span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a><span class="co">#&gt; 35332   Columbea angustifolia Araucaria angustifolia         Synonym Legitimate_but_incorrect</span></span>
+<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a><span class="co">#&gt; 35333     Columbea brasiliana Araucaria angustifolia         Synonym Legitimate_but_incorrect</span></span>
+<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a><span class="co">#&gt; 60644            Pinus dioica Araucaria angustifolia         Synonym                     &lt;NA&gt;</span></span>
+<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a><span class="co">#&gt; 141020     Araucaria bibbiani Araucaria angustifolia         Synonym                     &lt;NA&gt;</span></span>
+<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a><span class="co">#&gt; 141021   Araucaria lindleyana Araucaria angustifolia         Synonym                     &lt;NA&gt;</span></span>
+<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a><span class="co">#&gt; 141041   Araucaria brasiliana Araucaria angustifolia         Synonym             Illegitimate</span></span>
+<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a><span class="co">#&gt; 85308    Adesmia psoraleoides     Adesmia paranensis         Synonym Legitimate_but_incorrect</span></span></code></pre></div>
+<p>We can see that <em>Araucaria angustifolia</em> has 12 synonyms in
+Flora e Funga do Brasil, while <em>Adesmia paranensis</em> has one
+synonym.</p>
 </div>
 </div>
 
