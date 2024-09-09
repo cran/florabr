@@ -7,12 +7,12 @@ knitr::opts_chunk$set(
 )
 
 ## ----results='hide', message=FALSE--------------------------------------------
-#  if(!require(devtools)){
-#      install.packages("devtools")
+#  if(!require(remotes)){
+#      install.packages("remotes")
 #  }
 #  
-#  if(!require(florabr)){
-#  devtools::install_github('wevertonbio/florabr')}
+#  if(!require(faunabr)){
+#  remotes::install_github('wevertonbio/faunabr')}
 #  
 #  library(florabr)
 

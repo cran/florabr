@@ -18,8 +18,7 @@ knitr::opts_chunk$set(
 ## -----------------------------------------------------------------------------
 #  #Get available options to filter by lifeForm
 #  get_attributes(data = bf,
-#                 attribute = "lifeForm",
-#                 kingdom = "Plantae")
+#                 attribute = "lifeForm")[[1]]
 #  #>               lifeForm
 #  #> 1      Aquatic-Benthos
 #  #> 2      Aquatic-Neuston
@@ -46,8 +45,7 @@ knitr::opts_chunk$set(
 #  
 #  #Get available options to filter by  Biome
 #  get_attributes(data = bf,
-#                 attribute = "Biome",
-#                 kingdom = "Plantae")
+#                 attribute = "Biome")[[1]]
 #  #>                 biome
 #  #> 1              Amazon
 #  #> 2     Atlantic_Forest
@@ -59,8 +57,7 @@ knitr::opts_chunk$set(
 #  
 #  #Get available options to filter by vegetation
 #  get_attributes(data = bf,
-#                 attribute = "vegetationType",
-#                 kingdom = "Plantae")
+#                 attribute = "vegetation")[[1]]
 #  #>                         vegetation
 #  #> 1                   Anthropic_Area
 #  #> 2                         Caatinga
@@ -109,7 +106,7 @@ knitr::opts_chunk$set(
 
 ## -----------------------------------------------------------------------------
 #  #First 7 unique values of biomes in the filtered dataset
-#  unique(af_spp$Biome)[1:7]
+#  unique(af_spp$biome)[1:7]
 #  #> [1] "Atlantic_Forest"
 #  #> [2] "Atlantic_Forest;Cerrado"
 #  #> [3] "Atlantic_Forest;Caatinga"
